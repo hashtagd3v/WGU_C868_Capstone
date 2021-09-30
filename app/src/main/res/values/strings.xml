@@ -3,4 +3,6 @@
     <string name="welcome">Welcome To Student Tracker!</string>
     <string name="button_enter">ENTER</string>
     <string name="image_book_logo">book logo</string>
+    <string name="label_termlist">Term List</string>
+    <string name="title_studenttracker">Student Tracker</string>
 </resources>
