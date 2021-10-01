@@ -43,4 +43,6 @@ public class TermList extends AppCompatActivity {
 
     }
 
+    //TODO Add action bar? + Design term list screen.
+
 }

@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">Jay Michalek WGU Scheduler</string>
-    <string name="welcome">Welcome To Student Tracker!</string>
-    <string name="button_enter">ENTER</string>
-    <string name="image_book_logo">book logo</string>
-    <string name="label_termlist">Term List</string>
+    <string name="title_welcome">Welcome To Student Tracker!</string>
+    <string name="btn_enter">ENTER</string>
+    <string name="image_bookLogo">book logo</string>
+    <string name="tile_termlist">Term List</string>
     <string name="title_studenttracker">Student Tracker</string>
-    <string name="addTerm">Add Term</string>
-    <string name="termDetail">Term Detail</string>
+    <string name="title_addTerm">Add Term</string>
+    <string name="title_termDetail">Term Detail</string>
+    <string name="title_courseDetail">Course Detail</string>
+    <string name="title_addCourse">Add Course</string>
+    <string name="title_courseList">Course List</string>
+    <string name="title_addAssessment">Add Assessment</string>
 </resources>

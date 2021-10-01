@@ -3,14 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/drawable/ic_addNote_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/drawable/ic_addNote_foreground.xml" value="0.3828125" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/drawable/ic_addnote_background.xml" value="0.23333333333333334" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_assessment_screen.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_course_screen.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_note_screen.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_term_screen.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_course_detail.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_course_list.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_term_detail.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_term_list.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_assessment_screen.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_course_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_note_screen.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_term_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_course_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_course_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_term_detail.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_term_list.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/mipmap-anydpi-v26/ic_addNote.xml" value="0.22135416666666666" />
       </map>
     </option>
   </component>

@@ -10,17 +10,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JayMichalekWGUScheduler">
         <activity
+            android:name=".UI.AddNoteScreen"
+            android:exported="true" />
+        <activity
+            android:name=".UI.AddAssessmentScreen"
+            android:exported="true"
+            android:label="@string/title_addAssessment" />
+        <activity
+            android:name=".UI.CourseDetail"
+            android:exported="true"
+            android:label="@string/title_courseDetail" />
+        <activity
+            android:name=".UI.AddCourseScreen"
+            android:exported="true"
+            android:label="@string/title_addCourse" />
+        <activity
             android:name=".UI.AddTermScreen"
             android:exported="true"
-            android:label="@string/addTerm"/>
+            android:label="@string/title_addTerm" />
         <activity
             android:name=".UI.TermDetail"
             android:exported="true"
-            android:label="@string/termDetail"/>
+            android:label="@string/title_termDetail" />
         <activity
             android:name=".UI.TermList"
             android:exported="true"
-            android:label="@string/label_termlist" />
+            android:label="@string/tile_termlist" />
         <activity
             android:name=".UI.MainActivity"
             android:exported="true">

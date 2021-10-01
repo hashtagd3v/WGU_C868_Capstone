@@ -2,16 +2,18 @@ package android.jmichalek.jaymichalekwguscheduler.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
-public class AddTermScreen extends AppCompatActivity {
+public class CourseDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_term_screen);
+        setContentView(R.layout.activity_course_detail);
 
         // Allows user to switch back to previous screen & retain information.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -28,8 +30,23 @@ public class AddTermScreen extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+
     }
 
-    //TODO Add action bar, back button that retains previous info, design screen
+    /* This method takes user to add assessment screen from course detail screen*/
+    public void addAssessmentBtn(View view) {
+
+        Intent intent = new Intent(CourseDetail.this, AddAssessmentScreen.class);
+        startActivity(intent);
+
+    }
+
+    /* This method takes a user to add notes screen from course detail screen.*/
+    public void addNoteBtn(View view) {
+
+        Intent intent = new Intent(CourseDetail.this, AddNoteScreen.class);
+        startActivity(intent);
+
+    }
 
 }
