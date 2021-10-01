@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /** When Enter button is pressed, this method brings user to next screen which
+    /* When Enter button is pressed, this method brings user to next screen which
      * is TermList screen.*/
     public void enterButton(View view) {
 
