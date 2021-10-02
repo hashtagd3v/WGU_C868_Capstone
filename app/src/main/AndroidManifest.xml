@@ -11,7 +11,8 @@
         android:theme="@style/Theme.JayMichalekWGUScheduler">
         <activity
             android:name=".UI.AddNoteScreen"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/title_addNote"/>
         <activity
             android:name=".UI.AddAssessmentScreen"
             android:exported="true"

@@ -11,4 +11,6 @@
     <string name="title_addCourse">Add Course</string>
     <string name="title_courseList">Course List</string>
     <string name="title_addAssessment">Add Assessment</string>
+    <string name="todo">TODO</string>
+    <string name="title_addNote">Add Note</string>
 </resources>

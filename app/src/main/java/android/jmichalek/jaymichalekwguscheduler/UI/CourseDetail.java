@@ -34,7 +34,7 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     /* This method takes user to add assessment screen from course detail screen*/
-    public void addAssessmentBtn(View view) {
+    public void addAssessment(View view) {
 
         Intent intent = new Intent(CourseDetail.this, AddAssessmentScreen.class);
         startActivity(intent);
@@ -42,7 +42,7 @@ public class CourseDetail extends AppCompatActivity {
     }
 
     /* This method takes a user to add notes screen from course detail screen.*/
-    public void addNoteBtn(View view) {
+    public void addNote(View view) {
 
         Intent intent = new Intent(CourseDetail.this, AddNoteScreen.class);
         startActivity(intent);
