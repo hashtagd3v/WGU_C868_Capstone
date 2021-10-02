@@ -2,20 +2,16 @@ package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-public class TermList extends AppCompatActivity {
+public class AssessmentDetail extends AppCompatActivity {
 
-    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_term_list);
+        setContentView(R.layout.activity_assessment_detail);
 
         // Allows user to switch back to previous screen & retain information.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -32,17 +28,7 @@ public class TermList extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /* This method takes user to add term screen when Add Term button is clicked from
-    * Term List screen.*/
-    public void addTerm(View view) {
-
-        Intent intent = new Intent(TermList.this, AddTermScreen.class);
-        startActivity(intent);
 
     }
-
-    //TODO Add action bar? + Design term list screen.
 
 }
