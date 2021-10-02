@@ -10,35 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JayMichalekWGUScheduler">
         <activity
-            android:name=".UI.AddNoteScreen"
-            android:exported="true"
-            android:label="@string/title_addNote"/>
-        <activity
-            android:name=".UI.AddAssessmentScreen"
+            android:name=".All.UI.AddAssessmentScreen"
             android:exported="true"
             android:label="@string/title_addAssessment" />
         <activity
-            android:name=".UI.CourseDetail"
+            android:name=".All.UI.CourseDetail"
             android:exported="true"
             android:label="@string/title_courseDetail" />
         <activity
-            android:name=".UI.AddCourseScreen"
+            android:name=".All.UI.AddCourseScreen"
             android:exported="true"
             android:label="@string/title_addCourse" />
         <activity
-            android:name=".UI.AddTermScreen"
+            android:name=".All.UI.AddTermScreen"
             android:exported="true"
             android:label="@string/title_addTerm" />
         <activity
-            android:name=".UI.TermDetail"
+            android:name=".All.UI.TermDetail"
             android:exported="true"
             android:label="@string/title_termDetail" />
         <activity
-            android:name=".UI.TermList"
+            android:name=".All.UI.TermList"
             android:exported="true"
             android:label="@string/tile_termlist" />
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".All.UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

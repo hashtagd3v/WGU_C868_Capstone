@@ -1,4 +1,4 @@
-package android.jmichalek.jaymichalekwguscheduler.UI;
+package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,17 +1,21 @@
-package android.jmichalek.jaymichalekwguscheduler.UI;
+package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
-public class AddTermScreen extends AppCompatActivity {
+public class TermList extends AppCompatActivity {
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_term_screen);
+        setContentView(R.layout.activity_term_list);
 
         // Allows user to switch back to previous screen & retain information.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -30,6 +34,15 @@ public class AddTermScreen extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //TODO Add action bar, back button that retains previous info, design screen
+    /* This method takes user to add term screen when Add Term button is clicked from
+    * Term List screen.*/
+    public void addTermBtn(View view) {
+
+        Intent intent = new Intent(TermList.this, AddTermScreen.class);
+        startActivity(intent);
+
+    }
+
+    //TODO Add action bar? + Design term list screen.
 
 }
