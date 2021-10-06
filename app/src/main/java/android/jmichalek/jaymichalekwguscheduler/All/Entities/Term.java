@@ -3,8 +3,6 @@ package android.jmichalek.jaymichalekwguscheduler.All.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "term_table")
 public class Term {
 
@@ -12,20 +10,23 @@ public class Term {
     private int termID;
 
     private String termName;
-    private Date startDate;
-    private Date endDate;
+    private String termStart;
+    private String termEnd;
 
-    public Term(int termID, String termName, Date startDate, Date endDate) {
+    public Term(int termID, String termName, String termStart, String termEnd) {
         this.termID = termID;
         this.termName = termName;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.termStart = termStart;
+        this.termEnd = termEnd;
     }
 
     @Override
     public String toString() {
         return "Term{" +
-                "termName='" + termName + '\'' +
+                "termID=" + termID +
+                ", termName='" + termName + '\'' +
+                ", termStart='" + termStart + '\'' +
+                ", termEnd='" + termEnd + '\'' +
                 '}';
     }
 
@@ -45,20 +46,19 @@ public class Term {
         this.termName = termName;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getTermStart() {
+        return termStart;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setTermStart(String termStart) {
+        this.termStart = termStart;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getTermEnd() {
+        return termEnd;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setTermEnd(String termEnd) {
+        this.termEnd = termEnd;
     }
-
 }

@@ -3,8 +3,6 @@ package android.jmichalek.jaymichalekwguscheduler.All.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "assessment_table")
 public class Assessment {
 
@@ -12,17 +10,15 @@ public class Assessment {
     private int assessmentID;
 
     private String assessmentName;
-    private String assessmentInfo;
-    private Date assessmentStart;
-    private Date assessmentEnd;
+    private String assessmentStart;
+    private String assessmentDate;
     private int courseID;
 
-    public Assessment(int assessmentID, String assessmentName, String assessmentInfo, Date assessmentStart, Date assessmentEnd, int courseID) {
+    public Assessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentDate, int courseID) {
         this.assessmentID = assessmentID;
         this.assessmentName = assessmentName;
-        this.assessmentInfo = assessmentInfo;
         this.assessmentStart = assessmentStart;
-        this.assessmentEnd = assessmentEnd;
+        this.assessmentDate = assessmentDate;
         this.courseID = courseID;
     }
 
@@ -31,9 +27,8 @@ public class Assessment {
         return "Assessment{" +
                 "assessmentID=" + assessmentID +
                 ", assessmentName='" + assessmentName + '\'' +
-                ", assessmentInfo='" + assessmentInfo + '\'' +
-                ", assessmentStart=" + assessmentStart +
-                ", assessmentEnd=" + assessmentEnd +
+                ", assessmentStart='" + assessmentStart + '\'' +
+                ", assessmentDate='" + assessmentDate + '\'' +
                 ", courseID=" + courseID +
                 '}';
     }
@@ -54,28 +49,20 @@ public class Assessment {
         this.assessmentName = assessmentName;
     }
 
-    public String getAssessmentInfo() {
-        return assessmentInfo;
-    }
-
-    public void setAssessmentInfo(String assessmentInfo) {
-        this.assessmentInfo = assessmentInfo;
-    }
-
-    public Date getAssessmentStart() {
+    public String getAssessmentStart() {
         return assessmentStart;
     }
 
-    public void setAssessmentStart(Date assessmentStart) {
+    public void setAssessmentStart(String assessmentStart) {
         this.assessmentStart = assessmentStart;
     }
 
-    public Date getAssessmentEnd() {
-        return assessmentEnd;
+    public String getAssessmentDate() {
+        return assessmentDate;
     }
 
-    public void setAssessmentEnd(Date assessmentEnd) {
-        this.assessmentEnd = assessmentEnd;
+    public void setAssessmentDate(String assessmentDate) {
+        this.assessmentDate = assessmentDate;
     }
 
     public int getCourseID() {
@@ -85,4 +72,5 @@ public class Assessment {
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }
+
 }

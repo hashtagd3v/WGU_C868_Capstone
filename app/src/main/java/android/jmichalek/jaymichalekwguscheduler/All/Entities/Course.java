@@ -3,8 +3,6 @@ package android.jmichalek.jaymichalekwguscheduler.All.Entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "course_table")
 public class Course {
 
@@ -12,18 +10,17 @@ public class Course {
     private int courseID;
 
     private String courseName;
-    private Date courseStart;
-    private Date courseEnd;
+    private String courseStart;
+    private String courseEnd;
     private String status;
     private String courseInstructorName;
     private String instructorPhone;
     private String instructorEmail;
-    private String courseInfo;
     private String courseNote;
     private int termID;
 
-    public Course(int courseID, String courseName, Date courseStart, Date courseEnd, String status, String courseInstructorName,
-                  String instructorPhone, String instructorEmail, String courseInfo, String courseNote, int termID) {
+    public Course(int courseID, String courseName, String courseStart, String courseEnd, String status, String courseInstructorName,
+                  String instructorPhone, String instructorEmail, String courseNote, int termID) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseStart = courseStart;
@@ -32,23 +29,7 @@ public class Course {
         this.courseInstructorName = courseInstructorName;
         this.instructorPhone = instructorPhone;
         this.instructorEmail = instructorEmail;
-        this.courseInfo = courseInfo;
         this.courseNote = courseNote;
-        this.termID = termID;
-    }
-
-    /* This constructor has does not include courseNote as notes are optional.*/
-    public Course(int courseID, String courseName, Date courseStart, Date courseEnd, String status, String courseInstructorName,
-                  String instructorPhone, String instructorEmail, String courseInfo, int termID) {
-        this.courseID = courseID;
-        this.courseName = courseName;
-        this.courseStart = courseStart;
-        this.courseEnd = courseEnd;
-        this.status = status;
-        this.courseInstructorName = courseInstructorName;
-        this.instructorPhone = instructorPhone;
-        this.instructorEmail = instructorEmail;
-        this.courseInfo = courseInfo;
         this.termID = termID;
     }
 
@@ -57,13 +38,12 @@ public class Course {
         return "Course{" +
                 "courseID=" + courseID +
                 ", courseName='" + courseName + '\'' +
-                ", courseStart=" + courseStart +
-                ", courseEnd=" + courseEnd +
+                ", courseStart='" + courseStart + '\'' +
+                ", courseEnd='" + courseEnd + '\'' +
                 ", status='" + status + '\'' +
                 ", courseInstructorName='" + courseInstructorName + '\'' +
                 ", instructorPhone='" + instructorPhone + '\'' +
                 ", instructorEmail='" + instructorEmail + '\'' +
-                ", courseInfo='" + courseInfo + '\'' +
                 ", courseNote='" + courseNote + '\'' +
                 ", termID=" + termID +
                 '}';
@@ -85,19 +65,19 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public Date getCourseStart() {
+    public String getCourseStart() {
         return courseStart;
     }
 
-    public void setCourseStart(Date courseStart) {
+    public void setCourseStart(String courseStart) {
         this.courseStart = courseStart;
     }
 
-    public Date getCourseEnd() {
+    public String getCourseEnd() {
         return courseEnd;
     }
 
-    public void setCourseEnd(Date courseEnd) {
+    public void setCourseEnd(String courseEnd) {
         this.courseEnd = courseEnd;
     }
 
@@ -131,14 +111,6 @@ public class Course {
 
     public void setInstructorEmail(String instructorEmail) {
         this.instructorEmail = instructorEmail;
-    }
-
-    public String getCourseInfo() {
-        return courseInfo;
-    }
-
-    public void setCourseInfo(String courseInfo) {
-        this.courseInfo = courseInfo;
     }
 
     public String getCourseNote() {

@@ -11,7 +11,8 @@
         android:theme="@style/Theme.JayMichalekWGUScheduler">
         <activity
             android:name=".All.UI.AssessmentDetail"
-            android:exported="true" />
+            android:exported="true"
+            android:label="@string/title_assessmentDetail"/>
         <activity
             android:name=".All.UI.AddAssessmentScreen"
             android:exported="true"
