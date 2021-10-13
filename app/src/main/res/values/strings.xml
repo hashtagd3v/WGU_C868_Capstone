@@ -3,15 +3,21 @@
     <string name="title_welcome">Welcome To Student Tracker!</string>
     <string name="btn_enter">ENTER</string>
     <string name="image_bookLogo">book logo</string>
-    <string name="tile_termlist">Term List</string>
-    <string name="title_studenttracker">Student Tracker</string>
+    <string name="title_termList">Term List</string>
+    <string name="title_studentTracker">Student Tracker</string>
     <string name="title_addTerm">Add Term</string>
     <string name="title_termDetail">Term Detail</string>
     <string name="title_courseDetail">Course Detail</string>
     <string name="title_addCourse">Add Course</string>
     <string name="title_courseList">Course List</string>
     <string name="title_addAssessment">Add Assessment</string>
-    <string name="todo">TODO</string>
     <string name="title_addNote">Add Note</string>
     <string name="title_assessmentDetail">Assessment Detail</string>
+    <string name="addTermLabel_termTitle">Term Title:</string>
+    <string name="addTermHint_termTitle">Term 1/Spring Term</string>
+    <string name="addTermLabel_termStartDate">Term Start Date:</string>
+    <string name="addTermHint_termStartDate">1/1/2021</string>
+    <string name="addTermHint_termEndDate">3/31/2021</string>
+    <string name="addTermLabel_termEndDate">Term End Date:</string>
+    <string name="todo">TODO</string>
 </resources>

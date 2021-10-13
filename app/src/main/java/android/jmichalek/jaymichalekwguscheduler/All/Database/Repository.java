@@ -36,7 +36,7 @@ public class Repository {
             mAllTerms = mTermDAO.getAllTerms();
         });
         try {
-            Thread.sleep(1000); //Change to 3000 if acting weird.
+            Thread.sleep(3000); //Change to 3000 if acting weird.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class Repository {
             mAllCourses = mCourseDAO.getAllCourses();
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class Repository {
             mAllAssessments = mAssessmentDAO.getAllAssessments();
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -72,7 +72,7 @@ public class Repository {
             mTermDAO.insert(term);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class Repository {
             mCourseDAO.insert(course);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -94,7 +94,7 @@ public class Repository {
             mAssessmentDAO.insert(assessment);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -105,7 +105,7 @@ public class Repository {
             mTermDAO.update(term);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -116,7 +116,7 @@ public class Repository {
             mCourseDAO.update(course);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -127,7 +127,7 @@ public class Repository {
             mAssessmentDAO.update(assessment);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -138,7 +138,7 @@ public class Repository {
             mTermDAO.delete(term);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -149,7 +149,7 @@ public class Repository {
             mCourseDAO.delete(course);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -160,7 +160,7 @@ public class Repository {
             mAssessmentDAO.delete(assessment);
         });
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

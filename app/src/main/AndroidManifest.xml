@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/title_studenttracker"
+        android:label="@string/title_studentTracker"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JayMichalekWGUScheduler">
@@ -36,7 +36,7 @@
         <activity
             android:name=".All.UI.TermList"
             android:exported="true"
-            android:label="@string/tile_termlist" />
+            android:label="@string/title_termList" />
         <activity
             android:name=".All.UI.MainActivity"
             android:exported="true">
