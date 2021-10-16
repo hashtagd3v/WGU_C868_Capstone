@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Try code/DB test:
         Repository repository = new Repository(getApplication());
-        Term term = new Term(1,"Term 1", "1/1/21", "3/30/21");
+        Term term = new Term(0,"Term 1", "1/1/21", "3/30/21");
         repository.insert(term);
 
         //TODO: Add 2 terms, 2 courses, 2 assessments - dummy data

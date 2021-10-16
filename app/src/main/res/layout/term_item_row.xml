@@ -6,15 +6,17 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/termTitle_itemLabel"
+        android:id="@+id/rowItem_term"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
+        android:hint="@string/addTermHint_termTitle"
         android:paddingTop="8dp"
-        android:text="@string/addTermLabel_termTitle"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
