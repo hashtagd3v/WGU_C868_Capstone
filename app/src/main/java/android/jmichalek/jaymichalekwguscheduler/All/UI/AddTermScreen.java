@@ -38,7 +38,7 @@ public class AddTermScreen extends AppCompatActivity {
         editTermEnd = findViewById(R.id.editText_endDate);
 
         editTermTitle.setText(termTitle);;
-        editTermStart.setText(termStart);                       //TODO: Try this line if it works!!!
+        editTermStart.setText(termStart);
         editTermEnd.setText(termEnd);
 
         repository = new Repository(getApplication());
@@ -63,7 +63,7 @@ public class AddTermScreen extends AppCompatActivity {
         String currentEnd = editTermEnd.getText().toString();
 
         if (currentTermTitle != null) {
-            Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd);             //TODO: Check if this line will work!!!
+            Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd);
             repository.insert(newTerm);
         }
 

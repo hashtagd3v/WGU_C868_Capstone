@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Try code/DB test:
-        Repository repository = new Repository(getApplication());
-        Term term = new Term(0,"Term 1", "1/1/21", "3/30/21");
-        repository.insert(term);
+//        Repository repository = new Repository(getApplication());
+//        Term term = new Term(0,"Term 1", "1/1/21", "3/30/21");
+//        repository.insert(term);
 
         //TODO: Add 2 terms, 2 courses, 2 assessments - dummy data
 
