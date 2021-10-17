@@ -10,6 +10,7 @@ import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -39,14 +40,32 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    /* This method enables user to switch back to previous screen.*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_recyclerview, menu);
+        return true;
+    }
+
+    /* This method enables user to switch back to previous screen or refresh screen.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.menu_refresh: //FIXME: Refresh menu item selection not showing on screen. Is commented code necessary?
+                repository = new Repository(getApplication());
+                List<Term> allTerms = repository.getAllTerms();
+                RecyclerView recyclerView = findViewById(R.id.recyclerView_term);
+                final TermAdapter termAdapter = new TermAdapter(this);
+                recyclerView.setAdapter(termAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                termAdapter.setTerms(allTerms);
+
         }
+
         return super.onOptionsItemSelected(item);
     }
 

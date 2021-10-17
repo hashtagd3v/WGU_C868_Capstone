@@ -20,4 +20,8 @@
     <string name="addTermHint_termEndDate">3/31/2021</string>
     <string name="addTermLabel_termEndDate">Term End Date:</string>
     <string name="todo">TODO</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_notify">Notify</string>
 </resources>
