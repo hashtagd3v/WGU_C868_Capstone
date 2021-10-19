@@ -7,6 +7,7 @@ import android.jmichalek.jaymichalekwguscheduler.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,9 +17,14 @@ import java.util.List;
 
 public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder> {
 
+    private List<Term> mTerms;
+    private final Context context;
+    private final LayoutInflater mInflater;
+
     class TermViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView rowItemTerm;
+
         private TermViewHolder(View itemView) {
             super(itemView);
             rowItemTerm = itemView.findViewById(R.id.rowItem_term);
@@ -38,9 +44,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
         }
 
     }
-    private List<Term> mTerms;
-    private final Context context;
-    private final LayoutInflater mInflater;
 
     public TermAdapter(Context context){
         mInflater = LayoutInflater.from(context);

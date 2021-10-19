@@ -6,6 +6,7 @@ import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ public class AddTermScreen extends AppCompatActivity {
     EditText editTermStart;
     EditText editTermEnd;
     Repository repository;
-    Term currentTerm;
+//    Term currentTerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +49,19 @@ public class AddTermScreen extends AppCompatActivity {
     /* This method enables user to switch back to previous screen.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
+
         }
+
         return super.onOptionsItemSelected(item);
+
     }
 
+    /*Enables user to add new term in Add Term Screen.*/
     public void saveTerm(View view) {
 
         String currentTermTitle = editTermTitle.getText().toString();
@@ -68,7 +74,5 @@ public class AddTermScreen extends AppCompatActivity {
         }
 
     }
-
-    //TODO Add action bar, back button that retains previous info, design screen
 
 }

@@ -13,12 +13,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.List;
 
 public class TermList extends AppCompatActivity {
 
     private Repository repository;
+    String termTitle;
+    String termStart;
+    String termEnd;
+    int current_termID;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -40,6 +45,7 @@ public class TermList extends AppCompatActivity {
 
     }
 
+    /*Inflates menu/refresh option for this screen.*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -55,7 +61,7 @@ public class TermList extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-            case R.id.menu_refresh: //FIXME: Refresh menu item selection not showing on screen. Is commented code necessary?
+            case R.id.menu_refresh:
                 repository = new Repository(getApplication());
                 List<Term> allTerms = repository.getAllTerms();
                 RecyclerView recyclerView = findViewById(R.id.recyclerView_term);
@@ -78,6 +84,15 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    //TODO Add action bar? + Design term list screen.
+    /* This method takes user to term detail/course list screen when Term item is clicked
+     * Term List screen.*/
+    public void editTerm(View view) {
+
+        //FIXME: Still unable to obtain selected item's information.
+
+        Intent intent = new Intent(TermList.this, TermDetail.class);
+        startActivity(intent);
+
+    }
 
 }
