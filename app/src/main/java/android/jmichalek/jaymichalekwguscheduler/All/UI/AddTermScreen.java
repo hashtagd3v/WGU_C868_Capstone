@@ -68,7 +68,11 @@ public class AddTermScreen extends AppCompatActivity {
         String currentStart = editTermStart.getText().toString();
         String currentEnd = editTermEnd.getText().toString();
 
-        if (currentTermTitle != null) {
+        //Check if term title edit text field is not empty:
+        if (currentTermTitle.isEmpty()) {
+            return;
+        }
+        else {
             Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd);
             repository.insert(newTerm);
         }

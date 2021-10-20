@@ -1,6 +1,7 @@
 package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.CircularArray;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +22,6 @@ import java.util.List;
 public class TermList extends AppCompatActivity {
 
     private Repository repository;
-    String termTitle;
-    String termStart;
-    String termEnd;
-    int current_termID;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -84,15 +82,21 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    /* This method takes user to term detail/course list screen when Term item is clicked
-     * Term List screen.*/
-    public void editTerm(View view) {
-
-        //FIXME: Still unable to obtain selected item's information.
-
-        Intent intent = new Intent(TermList.this, TermDetail.class);
-        startActivity(intent);
-
-    }
+//    /* This method takes user to term detail/course list screen when Term item is clicked
+//     * Term List screen.*/
+//    public void editTerm(View view) {
+//
+//          DO NOT DO IT THIS WAY!!! USE TERM/COURSE/ASSESSMENT ADAPTER TO GET DATA FROM OBJECT BEING CLICKED!!!
+//
+//
+//        final Term current = mTerms.get(position);
+//        Intent intent = new Intent(TermList.this, TermDetail.class);
+//        intent.putExtra("id", current.getTermID());
+//        intent.putExtra("name", current.getTermName());
+//        intent.putExtra("start", current.getTermStart());
+//        intent.putExtra("end", current.getTermEnd());
+//        startActivity(intent);
+//
+//    }
 
 }

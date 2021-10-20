@@ -70,7 +70,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             holder.rowItemCourse.setText(current.getCourseName());;
         }
         else {
-            holder.rowItemCourse.setText("No Courses Available.");
+            holder.rowItemCourse.setText(R.string.empty_noCourseAvailable);
         }
 
     }

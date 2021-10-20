@@ -1,6 +1,8 @@
 package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
@@ -11,6 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class TermDetail extends AppCompatActivity {
 
@@ -21,6 +26,7 @@ public class TermDetail extends AppCompatActivity {
     EditText editTermStart;
     EditText editTermEnd;
     Repository repository;
+    List<Term> mTerms;
     int current_termID;
 
     @Override
@@ -32,14 +38,13 @@ public class TermDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //FIXME: console println shows -1 for ID and null for name. Unable to obtain info.
         //Grab Term ID and other term information from Adapter:
         current_termID = getIntent().getIntExtra("id", -1);
         termTitle = getIntent().getStringExtra("name");
         termStart = getIntent().getStringExtra("start");
         termEnd = getIntent().getStringExtra("end");
 
-        System.out.println("Current Term Selected: " + current_termID + " " + termTitle);
+        System.out.println("Current Term Selected: " + current_termID + " and current term title is " + termTitle);
 
         editTermTitle = findViewById(R.id.editText_termTitle);
         editTermStart = findViewById(R.id.editText_startDate);
@@ -74,8 +79,6 @@ public class TermDetail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //FIXME: Obtain previous info and populate Edit Text Fields with info on screen.
-
 
     /*This method enables user to edit course detail when course item row is clicked from Term Detail screen.*/
     public void editCourse(View view) {
@@ -87,7 +90,48 @@ public class TermDetail extends AppCompatActivity {
     /*This method enables user to update term information of selected term item into database.*/
     public void updateTerm(View view) {
 
-        //TODO: Implement update current term feature.
+        Term current_term;
+        String name;
+        String start;
+        String end;
+
+        mTerms = repository.getAllTerms();
+        for (int i = 0; i < mTerms.size(); i++) {
+
+            current_term = mTerms.get(i);
+            if (current_term.getTermID() == current_termID) {
+                name = editTermTitle.getText().toString();
+                start = editTermStart.getText().toString();
+                end = editTermEnd.getText().toString();
+
+                current_term.setTermName(name);
+                current_term.setTermStart(start);
+                current_term.setTermEnd(end);
+
+                repository.update(current_term);
+                Toast.makeText(TermDetail.this, "Term Updated. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+
+    }
+
+    /*This method deletes selected term from database.*/
+    public void deleteTerm(View view) {
+
+        Term current_term;
+        mTerms = repository.getAllTerms();
+        for (int i = 0; i < mTerms.size(); i++) {
+
+            current_term = mTerms.get(i);
+            if (current_term.getTermID() == current_termID) {
+                repository.delete(current_term);
+                Toast.makeText(TermDetail.this, "Term Deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                break;
+            }
+
+        }
 
     }
 

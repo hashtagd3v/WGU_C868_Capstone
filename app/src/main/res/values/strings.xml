@@ -27,4 +27,6 @@
     <string name="courseItem_hint">Course Name</string>
     <string name="Btn_update">Update</string>
     <string name="btn_delete">Delete</string>
+    <string name="empty_noTermsAvailable">No Terms Available.</string>
+    <string name="empty_noCourseAvailable">No Courses Available.</string>
 </resources>
