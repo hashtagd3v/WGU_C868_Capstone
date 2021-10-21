@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
+import android.jmichalek.jaymichalekwguscheduler.All.Entities.Course;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;

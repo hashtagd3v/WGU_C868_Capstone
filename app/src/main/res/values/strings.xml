@@ -29,4 +29,10 @@
     <string name="btn_delete">Delete</string>
     <string name="empty_noTermsAvailable">No Terms Available.</string>
     <string name="empty_noCourseAvailable">No Courses Available.</string>
+    <string name="addCourseLabel_title">Course Title:</string>
+    <string name="addCourseHint_title">Course Name</string>
+    <string name="addCourseLabel_start">Course Start Date:</string>
+    <string name="hint_date">MM/DD/YYY</string>
+    <string name="addCourseLabel_end">Course End Date:</string>
+    <string name="btn_save">Save</string>
 </resources>

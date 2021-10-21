@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddTermScreen extends AppCompatActivity {
 
@@ -20,7 +21,6 @@ public class AddTermScreen extends AppCompatActivity {
     EditText editTermStart;
     EditText editTermEnd;
     Repository repository;
-//    Term currentTerm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,10 @@ public class AddTermScreen extends AppCompatActivity {
         String currentEnd = editTermEnd.getText().toString();
 
         //Check if term title edit text field is not empty:
-        if (currentTermTitle.isEmpty()) {
+        if (currentTermTitle.isEmpty() ||
+            currentStart.isEmpty()     ||
+            currentEnd.isEmpty()) {
+            Toast.makeText(AddTermScreen.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
             return;
         }
         else {

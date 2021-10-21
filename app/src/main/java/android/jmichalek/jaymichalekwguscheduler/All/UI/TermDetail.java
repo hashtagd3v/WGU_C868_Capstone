@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
+import android.jmichalek.jaymichalekwguscheduler.All.Entities.Course;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
@@ -57,6 +58,17 @@ public class TermDetail extends AppCompatActivity {
 
         repository = new Repository(getApplication());
 
+        //FIXME: All terms are showing all courses. Need to FILTER by Term ID!!!!!!!!
+
+        //Set Recycler View to show list of associated courses:
+        List<Course> allCourses = repository.getAllCourses();
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
+        final CourseAdapter courseAdapter = new CourseAdapter(this);
+        recyclerView.setAdapter(courseAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        courseAdapter.setCourse(allCourses);
+
     }
 
     /*Inflates refresh menu option for Recycler View.*/
@@ -75,6 +87,18 @@ public class TermDetail extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
+            case R.id.menu_refresh:
+
+                //FIXME: Make sure this only filters courses associated with selected Term!!!!!!!! Currently showing ALL TERMS from other courses!
+
+                repository = new Repository(getApplication());
+                List<Course> allCourses = repository.getAllCourses();
+                RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
+                final CourseAdapter courseAdapter = new CourseAdapter(this);
+                recyclerView.setAdapter(courseAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                courseAdapter.setCourse(allCourses);
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,6 +156,16 @@ public class TermDetail extends AppCompatActivity {
             }
 
         }
+
+    }
+
+    /* This method takes user to next screen/add course screen.*/
+    public void addCourse(View view) {
+
+        Intent intent = new Intent(TermDetail.this, AddCourseScreen.class);
+        //SEND CURRENT TERM'S ID TO AddCourseScreen.java TO UTILIZE SAME TERM ID:
+        intent.putExtra("id", current_termID);
+        startActivity(intent);
 
     }
 
