@@ -61,7 +61,7 @@ public class TermDetail extends AppCompatActivity {
         //FIXME: All terms are showing all courses. Need to FILTER by Term ID!!!!!!!!
 
         //Set Recycler View to show list of associated courses:
-        List<Course> allCourses = repository.getAllCourses();
+        List<Course> allCourses = repository.getCoursesByTermId(current_termID);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
         final CourseAdapter courseAdapter = new CourseAdapter(this);
@@ -92,7 +92,7 @@ public class TermDetail extends AppCompatActivity {
                 //FIXME: Make sure this only filters courses associated with selected Term!!!!!!!! Currently showing ALL TERMS from other courses!
 
                 repository = new Repository(getApplication());
-                List<Course> allCourses = repository.getAllCourses();
+                List<Course> allCourses = repository.getCoursesByTermId(current_termID);
                 RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
                 final CourseAdapter courseAdapter = new CourseAdapter(this);
                 recyclerView.setAdapter(courseAdapter);

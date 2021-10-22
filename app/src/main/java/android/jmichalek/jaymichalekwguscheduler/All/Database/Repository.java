@@ -55,6 +55,18 @@ public class Repository {
         return mAllCourses;
     }
 
+    public List<Course> getCoursesByTermId(final int termId) {
+        databaseWriteExecutor.execute(() -> {
+            mAllCourses = mCourseDAO.getCoursesByTermID(termId);
+        });
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return mAllCourses;
+    }
+
     public List<Assessment> getAllAssessments() {
         databaseWriteExecutor.execute(() -> {
             mAllAssessments = mAssessmentDAO.getAllAssessments();
