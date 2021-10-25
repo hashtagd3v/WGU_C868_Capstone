@@ -10,17 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JayMichalekWGUScheduler">
         <activity
+            android:name=".All.UI.CourseDetail"
+            android:exported="true"
+            android:label="@string/title_courseDetail" />
+        <activity
             android:name=".All.UI.AssessmentDetail"
             android:exported="true"
-            android:label="@string/title_assessmentDetail"/>
+            android:label="@string/title_assessmentDetail" />
         <activity
             android:name=".All.UI.AddAssessmentScreen"
             android:exported="true"
             android:label="@string/title_addAssessment" />
-        <activity
-            android:name=".All.UI.CourseDetail"
-            android:exported="true"
-            android:label="@string/title_courseDetail" />
         <activity
             android:name=".All.UI.AddCourseScreen"
             android:exported="true"

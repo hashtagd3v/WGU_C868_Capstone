@@ -1,6 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="280dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addCourseLabel_title" />
+
+            <EditText
+                android:id="@+id/editText_courseTitle"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="@string/addCourseHint_title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addCourseLabel_start" />
+
+            <EditText
+                android:id="@+id/editText_courseStart"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="@string/hint_date" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/addCourseLabel_end" />
+
+            <EditText
+                android:id="@+id/editText_courseEnd"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="@string/hint_date" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Course Status:" />
+
+            <EditText
+                android:id="@+id/editText_courseStatus"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:hint="In Progress/Not Started/Completed"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Course Instructor:" />
+
+            <EditText
+                android:id="@+id/editText_instructorName"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="e.g. John Smith" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Instructor Phone:" />
+
+            <EditText
+                android:id="@+id/editText_phone"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="123-456-7891" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Instructor Email:" />
+
+            <EditText
+                android:id="@+id/editText_email"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="instructor@email.com" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Course Note: (Optional)" />
+
+            <EditText
+                android:id="@+id/editText_note"
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+                android:hint="Type note here." />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_saveCourse"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="saveCourse"
+        android:text="@string/btn_save"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_assessmentList"
+        android:layout_width="409dp"
+        android:layout_height="214dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_saveCourse" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="@string/btn_delete"
+        android:onClick="deleteCourse"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_assessmentList"
+        app:layout_constraintEnd_toStartOf="@+id/btn_saveCourse"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_addAssessment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="addAssessment"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_assessmentList"
+        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.111"
+        app:srcCompat="@drawable/ic_add_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

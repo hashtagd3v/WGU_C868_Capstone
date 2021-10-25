@@ -58,8 +58,6 @@ public class TermDetail extends AppCompatActivity {
 
         repository = new Repository(getApplication());
 
-        //FIXME: All terms are showing all courses. Need to FILTER by Term ID!!!!!!!!
-
         //Set Recycler View to show list of associated courses:
         List<Course> allCourses = repository.getCoursesByTermId(current_termID);
 
@@ -71,7 +69,7 @@ public class TermDetail extends AppCompatActivity {
 
     }
 
-    /*Inflates refresh menu option for Recycler View.*/
+    /* Inflates refresh menu option for Recycler View.*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -83,15 +81,14 @@ public class TermDetail extends AppCompatActivity {
     /* This method enables user to switch back to previous screen.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
             case R.id.menu_refresh:
-
-                //FIXME: Make sure this only filters courses associated with selected Term!!!!!!!! Currently showing ALL TERMS from other courses!
-
                 repository = new Repository(getApplication());
+                //Filter courses by Term ID only:
                 List<Course> allCourses = repository.getCoursesByTermId(current_termID);
                 RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
                 final CourseAdapter courseAdapter = new CourseAdapter(this);
@@ -100,18 +97,19 @@ public class TermDetail extends AppCompatActivity {
                 courseAdapter.setCourse(allCourses);
 
         }
+
         return super.onOptionsItemSelected(item);
     }
 
 
-    /*This method enables user to edit course detail when course item row is clicked from Term Detail screen.*/
+    /* This method enables user to edit course detail when course item row is clicked from Term Detail screen.*/
     public void editCourse(View view) {
 
         //TODO: Implement edit course feature.
 
     }
 
-    /*This method enables user to update term information of selected term item into database.*/
+    /* This method enables user to update term information of selected term item into database.*/
     public void updateTerm(View view) {
 
         Term current_term;
@@ -141,7 +139,7 @@ public class TermDetail extends AppCompatActivity {
 
     }
 
-    /*This method deletes selected term from database.*/
+    /* This method deletes selected term from database.*/
     public void deleteTerm(View view) {
 
         Term current_term;
@@ -150,9 +148,16 @@ public class TermDetail extends AppCompatActivity {
 
             current_term = mTerms.get(i);
             if (current_term.getTermID() == current_termID) {
-                repository.delete(current_term);
-                Toast.makeText(TermDetail.this, "Term Deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
-                break;
+                List<Course> allCourses = repository.getCoursesByTermId(current_termID);
+                //Check if term has courses in it:
+                if (allCourses.isEmpty()) {
+                    repository.delete(current_term);
+                    Toast.makeText(TermDetail.this, "Term Deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                    break;
+                }
+                else {
+                    Toast.makeText(TermDetail.this, "Unable to delete terms with associated courses. Please delete courses listed first.", Toast.LENGTH_LONG).show();
+                }
             }
 
         }

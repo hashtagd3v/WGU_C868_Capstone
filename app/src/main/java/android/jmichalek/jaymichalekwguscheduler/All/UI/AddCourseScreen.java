@@ -30,6 +30,7 @@ public class AddCourseScreen extends AppCompatActivity {
     EditText editEmail;
     EditText editNotes;
     Repository repository;
+    Course currentCourse;
     int currentTermID;
 
     @Override
@@ -62,11 +63,14 @@ public class AddCourseScreen extends AppCompatActivity {
     /* This method enables user to switch back to previous screen.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
+
         }
+
         return super.onOptionsItemSelected(item);
 
     }
@@ -97,7 +101,6 @@ public class AddCourseScreen extends AppCompatActivity {
             Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
             repository.insert(newCourse);
             Toast.makeText(AddCourseScreen.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
-
 
         }
 

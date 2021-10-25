@@ -35,4 +35,5 @@
     <string name="hint_date">MM/DD/YYY</string>
     <string name="addCourseLabel_end">Course End Date:</string>
     <string name="btn_save">Save</string>
+    <string name="item_assessmentHint">Assessment</string>
 </resources>

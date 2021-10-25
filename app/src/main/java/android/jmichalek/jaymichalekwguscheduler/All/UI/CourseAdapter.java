@@ -32,7 +32,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final Course current = mCourse.get(position);
-                    Intent intent = new Intent(context, AddCourseScreen.class);          //send it to next class; context value is THE current class!!! context here = TermDetail.class
+                    Intent intent = new Intent(context, CourseDetail.class);          //send it to next class; context value is THE current class!!! context here = TermDetail.class
                     intent.putExtra("id", current.getCourseID());
                     intent.putExtra("name", current.getCourseName());
                     intent.putExtra("start", current.getCourseStart());
@@ -42,6 +42,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     intent.putExtra("phone", current.getInstructorPhone());
                     intent.putExtra("email", current.getInstructorEmail());
                     intent.putExtra("note", current.getCourseNote());
+                    intent.putExtra("term", current.getTermID());
                     context.startActivity(intent);
                 }
             });

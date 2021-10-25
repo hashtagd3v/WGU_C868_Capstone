@@ -125,6 +125,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_add_foreground" />
 
-    <!--    //TODO: INSERT COURSE LIST ADAPTER AT THE BOTTOM OF THIS SCREEN. -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>
