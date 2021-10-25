@@ -79,6 +79,18 @@ public class Repository {
         return mAllAssessments;
     }
 
+    public List<Assessment> getAssessmentsByCourseID(final int courseId) {
+        databaseWriteExecutor.execute(() -> {
+            mAllAssessments = mAssessmentDAO.getAssessmentsByCourseID(courseId);
+        });
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return mAllAssessments;
+    }
+
     public void insert(Term term) {
         databaseWriteExecutor.execute(() -> {
             mTermDAO.insert(term);

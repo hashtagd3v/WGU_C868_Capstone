@@ -56,6 +56,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
     public AssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = mInflater.inflate(R.layout.assessment_item_row, parent, false);
+
         return new AssessmentViewHolder(itemView);
 
     }
@@ -65,6 +66,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
         if (mAssessment != null) {
             Assessment current = mAssessment.get(position);
+            int id = current.getAssessmentID();
             holder.rowItemAssessment.setText(current.getAssessmentName());
         }
         else {
@@ -82,7 +84,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mAssessment.size();
     }
 
 }

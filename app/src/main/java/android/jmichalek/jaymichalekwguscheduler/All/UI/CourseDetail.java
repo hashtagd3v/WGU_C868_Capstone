@@ -1,9 +1,14 @@
 package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
+import static android.jmichalek.jaymichalekwguscheduler.All.UI.MyReceiver.REQUEST_CODE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Assessment;
@@ -17,11 +22,15 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
 
-    String courseID;
+    int courseID;
     String courseTitle;
     String courseStart;
     String courseEnd;
@@ -39,6 +48,7 @@ public class CourseDetail extends AppCompatActivity {
     EditText editEmail;
     EditText editNotes;
     Repository repository;
+    List<Course> mCourses;
     int currentTermID;
 
     @Override
@@ -56,7 +66,7 @@ public class CourseDetail extends AppCompatActivity {
         System.out.println("Course Detail: Term ID is " + currentTermID);
 
         //Grab information of current term selected:
-        courseID = getIntent().getStringExtra("id");
+        courseID = getIntent().getIntExtra("id", -1);
         courseTitle = getIntent().getStringExtra("name");
         courseStart = getIntent().getStringExtra("start");
         courseEnd = getIntent().getStringExtra("end");
@@ -91,8 +101,8 @@ public class CourseDetail extends AppCompatActivity {
 
         repository = new Repository(getApplication());
 
-        //FIXME: List/filter only assessments associated with course ID/create new method in repository:
-        List<Assessment> allAssessments = repository.getAllAssessments();
+        //Filter only associated assessments:
+        List<Assessment> allAssessments = repository.getAssessmentsByCourseID(courseID);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_assessmentList);
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
@@ -106,7 +116,7 @@ public class CourseDetail extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_recyclerview, menu);
+        getMenuInflater().inflate(R.menu.menu_options, menu);
         return true;
 
     }
@@ -127,8 +137,33 @@ public class CourseDetail extends AppCompatActivity {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
-            case R.id.menu_notify:
-            //TODO: Implement start course date alert.
+            case R.id.menu_notify:                                                                      //FIXME: Test code.
+                String startDate = editStart.getText().toString();
+                String myFormat = "MM/DD/YY";
+//                public static final int REQUEST_CODE=101;
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                Date myDate = null;
+                try {
+                    myDate = sdf.parse(startDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger = myDate.getTime();
+                Intent intent = new Intent(CourseDetail.this, MyReceiver.class);
+                intent.putExtra("key", "Course has started.");
+                PendingIntent sender=PendingIntent.getBroadcast(CourseDetail.this, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+            case R.id.menu_optionRefresh:
+                Repository repository = new Repository(getApplication());
+                //Filter Assessments by Course ID only:
+                List<Assessment> allAssessments = repository.getAssessmentsByCourseID(courseID);
+                RecyclerView recyclerView = findViewById(R.id.recyclerView_assessmentList);
+                final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
+                recyclerView.setAdapter(assessmentAdapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                assessmentAdapter.setAssessment(allAssessments);
 
         }
 
@@ -157,9 +192,9 @@ public class CourseDetail extends AppCompatActivity {
 
         } else {
 
-            Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
-            repository.insert(newCourse);
-            Toast.makeText(CourseDetail.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+            Course current = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
+            repository.update(current);
+            Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
         }
 
@@ -168,7 +203,44 @@ public class CourseDetail extends AppCompatActivity {
     // This method enables user to delete course from database.
     public void deleteCourse(View view) {
 
-        //TODO: Implement delete course feature.
+        Course current_course;
+        String courseName;
+        String courseStart;
+        String courseEnd;
+        String status;
+        String courseInstructorName;
+        String instructorPhone;
+        String instructorEmail;
+        String courseNote;
+
+        mCourses = repository.getAllCourses();
+        for(int i = 0; i < mCourses.size(); i++) {
+
+            current_course = mCourses.get(i);
+            if (current_course.getCourseID() == courseID) {
+                courseName = editCourseTitle.getText().toString();
+                courseStart = editStart.getText().toString();
+                courseEnd = editEnd.getText().toString();
+                status = editStatus.getText().toString();
+                courseInstructorName = editInstructor.getText().toString();
+                instructorPhone = editPhone.getText().toString();
+                instructorEmail = editEmail.getText().toString();
+                courseNote = editNotes.getText().toString();
+
+                current_course.setCourseName(courseName);
+                current_course.setCourseStart(courseStart);
+                current_course.setCourseEnd(courseEnd);
+                current_course.setStatus(status);
+                current_course.setCourseInstructorName(courseInstructorName);
+                current_course.setInstructorPhone(instructorPhone);
+                current_course.setInstructorEmail(instructorEmail);
+                current_course.setCourseNote(courseNote);
+
+                repository.update(current_course);
+                Toast.makeText(CourseDetail.this, "Course updated. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+            }
+
+        }
 
     }
 
