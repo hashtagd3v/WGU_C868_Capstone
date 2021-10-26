@@ -137,23 +137,43 @@ public class CourseDetail extends AppCompatActivity {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
-            case R.id.menu_notify:                                                                      //FIXME: Test code if notifications are working correctly.
+            case R.id.menu_notify:
                 String startDate = editStart.getText().toString();
-                String myFormat = "MM/DD/YY";
-//                public static final int REQUEST_CODE=101;
+                String myFormat = "MM/dd/yy";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                Date myDate = null;
+                Date myStartDate = null;
+                //Parse Start Date here:
                 try {
-                    myDate = sdf.parse(startDate);
+                    if (!startDate.isEmpty())
+                        myStartDate = sdf.parse(startDate);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Long trigger = myDate.getTime();
+                Long trigger = myStartDate.getTime();
+                //Set notification for start date here:
                 Intent intent = new Intent(CourseDetail.this, MyReceiver.class);
                 intent.putExtra("key", "Course has started.");
-                PendingIntent sender=PendingIntent.getBroadcast(CourseDetail.this, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent sender = PendingIntent.getBroadcast(CourseDetail.this, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
+            case R.id.menu_notifyEnd:
+                String endDate = editEnd.getText().toString();
+                String myFormat2 = "MM/dd/yy";
+                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+                Date myEndDate = null;
+                //Parse End Date here:
+                try {
+                    myEndDate = sdf2.parse(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger2 = myEndDate.getTime();
+                Intent secondIntent = new Intent(CourseDetail.this, MyReceiver.class);
+                secondIntent.putExtra("key", "Course has ended.");
+                PendingIntent sender2 = PendingIntent.getBroadcast(CourseDetail.this, REQUEST_CODE, secondIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager1 = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager1.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);
                 return true;
             case R.id.menu_optionRefresh:
                 Repository repository = new Repository(getApplication());

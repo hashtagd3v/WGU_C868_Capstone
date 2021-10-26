@@ -23,7 +23,8 @@
     <string name="menu_refresh">Refresh</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_share">Share</string>
-    <string name="menu_notify">Notify</string>
+    <string name="menu_notifyStart">Notify Start Date</string>
+    <string name="menu_notifyEnd">Notify End Date</string>
     <string name="courseItem_hint">Course Name</string>
     <string name="Btn_update">Update</string>
     <string name="btn_delete">Delete</string>

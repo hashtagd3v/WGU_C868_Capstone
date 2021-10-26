@@ -15,7 +15,7 @@ public class MyReceiver extends BroadcastReceiver {
 
     String channel_id = "test";
     static int notificationId;
-    public static final int REQUEST_CODE=101; //FIXME: Test code.
+    public static final int REQUEST_CODE=101;
 
     @Override
     public void onReceive(Context context, Intent intent) {

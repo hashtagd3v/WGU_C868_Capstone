@@ -10,10 +10,14 @@
         android:orderInCategory="100"
         app:showAsAction="never"
         android:id="@+id/menu_share"/>
-    <item android:title="@string/menu_notify"
+    <item android:title="@string/menu_notifyStart"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:id="@+id/menu_notify"/>
+    <item android:title="@string/menu_notifyEnd"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:id="@+id/menu_notifyEnd"/>
     <item
         android:orderInCategory="100"
         app:showAsAction="never"
