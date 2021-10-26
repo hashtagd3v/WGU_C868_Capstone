@@ -44,7 +44,6 @@ public class AddCourseScreen extends AppCompatActivity {
 
         //Grab associated term ID to use for saving course:
         currentTermID = getIntent().getIntExtra("id", -1);
-        System.out.println("The associated term's ID is " + currentTermID);
 
         //Connect activity layout of edit text fields:
         editCourseTitle = findViewById(R.id.editText_courseTitle);

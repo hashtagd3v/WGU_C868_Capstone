@@ -39,4 +39,8 @@
     <string name="item_assessmentHint">Assessment</string>
     <string name="channel_name">channelname</string>
     <string name="channel_description">channel description</string>
+    <string name="assessmentText_name">Assessment Name:</string>
+    <string name="assessmentText_title">Assessment Title</string>
+    <string name="assessmentText_start_date">Assessment Start Date:</string>
+    <string name="assessmentText_end_date">Assessment End Date:</string>
 </resources>

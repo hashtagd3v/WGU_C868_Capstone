@@ -63,8 +63,6 @@ public class CourseDetail extends AppCompatActivity {
         //Grab associated term ID to use for saving course:
         currentTermID = getIntent().getIntExtra("id", -1);
 
-        System.out.println("Course Detail: Term ID is " + currentTermID);
-
         //Grab information of current term selected:
         courseID = getIntent().getIntExtra("id", -1);
         courseTitle = getIntent().getStringExtra("name");
@@ -75,8 +73,6 @@ public class CourseDetail extends AppCompatActivity {
         phone = getIntent().getStringExtra("phone");
         email = getIntent().getStringExtra("email");
         notes = getIntent().getStringExtra("note");
-
-        System.out.println("Course Detail: Course Name is " + courseTitle);
 
         //Connect activity layout of edit text fields:
         editCourseTitle = findViewById(R.id.editText_courseTitle);
@@ -264,7 +260,10 @@ public class CourseDetail extends AppCompatActivity {
     // This method enables user to add new assessment.
     public void addAssessment(View view) {
 
-        //TODO: Send data to addAssessment screen and create new intent to show next screen.
+        Intent intent = new Intent(CourseDetail.this, AddAssessmentScreen.class);
+        //Send current course ID to AddAssessment.java to utilize same course ID.
+        intent.putExtra("id", courseID);
+        startActivity(intent);
 
     }
 
