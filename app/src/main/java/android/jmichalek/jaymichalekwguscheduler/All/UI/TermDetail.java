@@ -101,14 +101,6 @@ public class TermDetail extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    /* This method enables user to edit course detail when course item row is clicked from Term Detail screen.*/
-    public void editCourse(View view) {
-
-        //TODO: Implement edit course feature.
-
-    }
-
     /* This method enables user to update term information of selected term item into database.*/
     public void updateTerm(View view) {
 
@@ -121,6 +113,7 @@ public class TermDetail extends AppCompatActivity {
         for (int i = 0; i < mTerms.size(); i++) {
 
             current_term = mTerms.get(i);
+
             if (current_term.getTermID() == current_termID) {
                 name = editTermTitle.getText().toString();
                 start = editTermStart.getText().toString();

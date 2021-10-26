@@ -137,7 +137,7 @@ public class CourseDetail extends AppCompatActivity {
                 Intent shareIntent = Intent.createChooser(sendIntent, null);
                 startActivity(shareIntent);
                 return true;
-            case R.id.menu_notify:                                                                      //FIXME: Test code.
+            case R.id.menu_notify:                                                                      //FIXME: Test code if notifications are working correctly.
                 String startDate = editStart.getText().toString();
                 String myFormat = "MM/DD/YY";
 //                public static final int REQUEST_CODE=101;
@@ -174,6 +174,7 @@ public class CourseDetail extends AppCompatActivity {
     /* This method updates course information and saves to database.*/
     public void saveCourse(View view) {
 
+        Course currentCourse;
         courseTitle = editCourseTitle.getText().toString();
         courseStart = editStart.getText().toString();
         courseEnd = editEnd.getText().toString();
@@ -192,9 +193,25 @@ public class CourseDetail extends AppCompatActivity {
 
         } else {
 
-            Course current = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
-            repository.update(current);
-            Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
+            mCourses = repository.getAllCourses();
+            for (int i = 0; i < mCourses.size(); i++) {
+
+                currentCourse = mCourses.get(i);
+
+                if (currentCourse.getCourseID() == courseID) {
+                    currentCourse.setCourseName(courseTitle);
+                    currentCourse.setCourseStart(courseStart);
+                    currentCourse.setCourseEnd(courseEnd);
+                    currentCourse.setStatus(courseStatus);
+                    currentCourse.setCourseInstructorName(courseInstructor);
+                    currentCourse.setInstructorPhone(phone);
+                    currentCourse.setInstructorEmail(email);
+                    currentCourse.setCourseNote(notes);
+                    repository.update(currentCourse);
+                    Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+                }
+            }
 
         }
 
@@ -204,40 +221,20 @@ public class CourseDetail extends AppCompatActivity {
     public void deleteCourse(View view) {
 
         Course current_course;
-        String courseName;
-        String courseStart;
-        String courseEnd;
-        String status;
-        String courseInstructorName;
-        String instructorPhone;
-        String instructorEmail;
-        String courseNote;
 
         mCourses = repository.getAllCourses();
         for(int i = 0; i < mCourses.size(); i++) {
 
             current_course = mCourses.get(i);
             if (current_course.getCourseID() == courseID) {
-                courseName = editCourseTitle.getText().toString();
-                courseStart = editStart.getText().toString();
-                courseEnd = editEnd.getText().toString();
-                status = editStatus.getText().toString();
-                courseInstructorName = editInstructor.getText().toString();
-                instructorPhone = editPhone.getText().toString();
-                instructorEmail = editEmail.getText().toString();
-                courseNote = editNotes.getText().toString();
-
-                current_course.setCourseName(courseName);
-                current_course.setCourseStart(courseStart);
-                current_course.setCourseEnd(courseEnd);
-                current_course.setStatus(status);
-                current_course.setCourseInstructorName(courseInstructorName);
-                current_course.setInstructorPhone(instructorPhone);
-                current_course.setInstructorEmail(instructorEmail);
-                current_course.setCourseNote(courseNote);
-
-                repository.update(current_course);
-                Toast.makeText(CourseDetail.this, "Course updated. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                List<Assessment> assessments = repository.getAssessmentsByCourseID(courseID);
+                if (assessments.isEmpty()) {
+                    repository.delete(current_course);
+                    Toast.makeText(CourseDetail.this, "Course deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(CourseDetail.this, "Course cannot be deleted. Please delete all associated assessments.", Toast.LENGTH_LONG).show();
+                }
             }
 
         }

@@ -82,21 +82,4 @@ public class TermList extends AppCompatActivity {
 
     }
 
-//    /* This method takes user to term detail/course list screen when Term item is clicked
-//     * Term List screen.*/
-//    public void editTerm(View view) {
-//
-//          DO NOT DO IT THIS WAY!!! USE TERM/COURSE/ASSESSMENT ADAPTER TO GET DATA FROM OBJECT BEING CLICKED!!!
-//
-//
-//        final Term current = mTerms.get(position);
-//        Intent intent = new Intent(TermList.this, TermDetail.class);
-//        intent.putExtra("id", current.getTermID());
-//        intent.putExtra("name", current.getTermName());
-//        intent.putExtra("start", current.getTermStart());
-//        intent.putExtra("end", current.getTermEnd());
-//        startActivity(intent);
-//
-//    }
-
 }
