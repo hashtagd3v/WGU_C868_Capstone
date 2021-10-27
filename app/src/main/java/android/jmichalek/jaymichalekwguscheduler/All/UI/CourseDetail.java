@@ -31,6 +31,7 @@ import java.util.Locale;
 public class CourseDetail extends AppCompatActivity {
 
     int courseID;
+    int currentTermID;
     String courseTitle;
     String courseStart;
     String courseEnd;
@@ -49,7 +50,7 @@ public class CourseDetail extends AppCompatActivity {
     EditText editNotes;
     Repository repository;
     List<Course> mCourses;
-    int currentTermID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class CourseDetail extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Grab associated term ID to use for saving course:
-        currentTermID = getIntent().getIntExtra("id", -1);
+        currentTermID = getIntent().getIntExtra("term", -1);
 
         //Grab information of current term selected:
         courseID = getIntent().getIntExtra("id", -1);
@@ -74,7 +75,7 @@ public class CourseDetail extends AppCompatActivity {
         email = getIntent().getStringExtra("email");
         notes = getIntent().getStringExtra("note");
 
-        //Connect activity layout of edit text fields:
+        //Connect activity layout with edit text fields:
         editCourseTitle = findViewById(R.id.editText_courseTitle);
         editStart = findViewById(R.id.editText_courseStart);
         editEnd = findViewById(R.id.editText_courseEnd);
@@ -99,6 +100,10 @@ public class CourseDetail extends AppCompatActivity {
 
         //Filter only associated assessments:
         List<Assessment> allAssessments = repository.getAssessmentsByCourseID(courseID);
+
+        if (allAssessments.isEmpty()) {
+            Toast.makeText(CourseDetail.this, "No Assessments Available.", Toast.LENGTH_LONG).show();
+        }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_assessmentList);
         final AssessmentAdapter assessmentAdapter = new AssessmentAdapter(this);
@@ -180,6 +185,7 @@ public class CourseDetail extends AppCompatActivity {
                 recyclerView.setAdapter(assessmentAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 assessmentAdapter.setAssessment(allAssessments);
+                Toast.makeText(CourseDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
 
         }
 
@@ -187,8 +193,8 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
-    /* This method updates course information and saves to database.*/
-    public void saveCourse(View view) {
+    /* This method updates course information and saves to database. */
+    public void updateCourse(View view) {
 
         Course currentCourse;
         courseTitle = editCourseTitle.getText().toString();
@@ -201,20 +207,21 @@ public class CourseDetail extends AppCompatActivity {
         notes = editNotes.getText().toString();
 
         //Check if text fields are not empty:
-        if (courseTitle.isEmpty() || courseStart.isEmpty() || courseEnd.isEmpty()
+        if (    courseTitle.isEmpty() || courseStart.isEmpty() || courseEnd.isEmpty()
                 || courseStatus.isEmpty() || courseInstructor.isEmpty() ||
-                phone.isEmpty() || email.isEmpty()) {
+                phone.isEmpty() || email.isEmpty()  ) {
 
             Toast.makeText(CourseDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
 
         } else {
 
-            mCourses = repository.getAllCourses();
+            mCourses = repository.getCoursesByTermId(currentTermID);
             for (int i = 0; i < mCourses.size(); i++) {
 
                 currentCourse = mCourses.get(i);
 
                 if (currentCourse.getCourseID() == courseID) {
+
                     currentCourse.setCourseName(courseTitle);
                     currentCourse.setCourseStart(courseStart);
                     currentCourse.setCourseEnd(courseEnd);
@@ -238,18 +245,25 @@ public class CourseDetail extends AppCompatActivity {
 
         Course current_course;
 
-        mCourses = repository.getAllCourses();
+        mCourses = repository.getCoursesByTermId(currentTermID);         
         for(int i = 0; i < mCourses.size(); i++) {
 
             current_course = mCourses.get(i);
+
             if (current_course.getCourseID() == courseID) {
+
                 List<Assessment> assessments = repository.getAssessmentsByCourseID(courseID);
+
                 if (assessments.isEmpty()) {
+
                     repository.delete(current_course);
                     Toast.makeText(CourseDetail.this, "Course deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+
                 }
                 else {
+
                     Toast.makeText(CourseDetail.this, "Course cannot be deleted. Please delete all associated assessments.", Toast.LENGTH_LONG).show();
+
                 }
             }
 

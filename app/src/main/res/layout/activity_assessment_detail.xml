@@ -75,15 +75,27 @@
 
     <Button
         android:id="@+id/btn_saveAssessment"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:onClick="saveAssessment"
+        android:layout_marginEnd="32dp"
+        android:onClick="updateAssessment"
         android:text="@string/btn_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.079" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_delete"
+        android:onClick="deleteAssessment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_saveAssessment"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintVertical_bias="0.079" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

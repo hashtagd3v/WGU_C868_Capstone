@@ -30,7 +30,6 @@ public class AddCourseScreen extends AppCompatActivity {
     EditText editEmail;
     EditText editNotes;
     Repository repository;
-    Course currentCourse;
     int currentTermID;
 
     @Override

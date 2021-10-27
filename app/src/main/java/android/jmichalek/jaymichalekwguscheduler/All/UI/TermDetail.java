@@ -45,8 +45,7 @@ public class TermDetail extends AppCompatActivity {
         termStart = getIntent().getStringExtra("start");
         termEnd = getIntent().getStringExtra("end");
 
-        System.out.println("Current Term Selected: " + current_termID + " and current term title is " + termTitle);
-
+        //Connect activity layout with edit text fields:
         editTermTitle = findViewById(R.id.editText_termTitle);
         editTermStart = findViewById(R.id.editText_startDate);
         editTermEnd = findViewById(R.id.editText_endDate);
@@ -60,6 +59,12 @@ public class TermDetail extends AppCompatActivity {
 
         //Set Recycler View to show list of associated courses:
         List<Course> allCourses = repository.getCoursesByTermId(current_termID);
+
+        if (allCourses.isEmpty()) {
+
+            Toast.makeText(TermDetail.this, "No Courses Available.", Toast.LENGTH_LONG).show();
+
+        }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
         final CourseAdapter courseAdapter = new CourseAdapter(this);
@@ -95,6 +100,7 @@ public class TermDetail extends AppCompatActivity {
                 recyclerView.setAdapter(courseAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 courseAdapter.setCourse(allCourses);
+                Toast.makeText(TermDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
 
         }
 

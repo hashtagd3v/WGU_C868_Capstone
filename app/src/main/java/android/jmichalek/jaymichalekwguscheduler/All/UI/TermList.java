@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class TermList extends AppCompatActivity {
 
         repository = new Repository(getApplication());
         List<Term> allTerms = repository.getAllTerms();
+
+        if (allTerms.isEmpty()) {
+            Toast.makeText(TermList.this, "No Terms Available.", Toast.LENGTH_LONG).show();
+        }
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView_term);
         final TermAdapter termAdapter = new TermAdapter(this);
         recyclerView.setAdapter(termAdapter);
@@ -67,6 +73,7 @@ public class TermList extends AppCompatActivity {
                 recyclerView.setAdapter(termAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 termAdapter.setTerms(allTerms);
+                Toast.makeText(TermList.this, "Refreshed.", Toast.LENGTH_LONG).show();
 
         }
 

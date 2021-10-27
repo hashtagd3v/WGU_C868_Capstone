@@ -34,6 +34,7 @@ public class AddTermScreen extends AppCompatActivity {
         termTitle = getIntent().getStringExtra("name");
         termStart = getIntent().getStringExtra("start");
         termEnd = getIntent().getStringExtra("end");
+
         editTermTitle = findViewById(R.id.editText_termTitle);
         editTermStart = findViewById(R.id.editText_startDate);
         editTermEnd = findViewById(R.id.editText_endDate);
@@ -69,15 +70,20 @@ public class AddTermScreen extends AppCompatActivity {
         String currentEnd = editTermEnd.getText().toString();
 
         //Check if term title edit text field is not empty:
-        if (currentTermTitle.isEmpty() ||
-            currentStart.isEmpty()     ||
-            currentEnd.isEmpty()) {
+        if (    currentTermTitle.isEmpty() ||
+                currentStart.isEmpty()     ||
+                currentEnd.isEmpty()    ) {
+
             Toast.makeText(AddTermScreen.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
             return;
+
         }
         else {
+
             Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd);
             repository.insert(newTerm);
+            Toast.makeText(AddTermScreen.this, "New term added. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+
         }
 
     }
