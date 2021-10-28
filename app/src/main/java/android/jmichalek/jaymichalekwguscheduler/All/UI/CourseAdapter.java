@@ -72,7 +72,6 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         if (mCourse != null) {
             Course current = mCourse.get(position);
-            int id = current.getCourseID();
             holder.rowItemCourse.setText(current.getCourseName());;
         }
         else {

@@ -2,10 +2,6 @@ package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import static android.jmichalek.jaymichalekwguscheduler.All.UI.MyReceiver.REQUEST_CODE;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,12 +11,15 @@ import android.jmichalek.jaymichalekwguscheduler.All.Entities.Assessment;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Course;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -185,7 +184,12 @@ public class CourseDetail extends AppCompatActivity {
                 recyclerView.setAdapter(assessmentAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 assessmentAdapter.setAssessment(allAssessments);
-                Toast.makeText(CourseDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
+                if (allAssessments.isEmpty()) {
+                    Toast.makeText(CourseDetail.this, "No Assessments Available.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(CourseDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
+                }
 
         }
 

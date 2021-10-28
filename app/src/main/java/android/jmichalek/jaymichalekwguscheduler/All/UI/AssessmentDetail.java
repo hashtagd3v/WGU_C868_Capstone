@@ -2,9 +2,6 @@ package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import static android.jmichalek.jaymichalekwguscheduler.All.UI.MyReceiver.REQUEST_CODE;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -18,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

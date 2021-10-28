@@ -4,15 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.collection.CircularArray;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -70,7 +67,6 @@ public class TermAdapter extends RecyclerView.Adapter<TermAdapter.TermViewHolder
 
         if (mTerms != null) {
             Term current = mTerms.get(position);
-            int id = current.getTermID();
             holder.rowItemTerm.setText(current.getTermName());
         }
         else {

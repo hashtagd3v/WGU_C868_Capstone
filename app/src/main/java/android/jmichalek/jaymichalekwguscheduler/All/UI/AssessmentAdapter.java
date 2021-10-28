@@ -66,7 +66,6 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
         if (mAssessment != null) {
             Assessment current = mAssessment.get(position);
-            int id = current.getAssessmentID();
             holder.rowItemAssessment.setText(current.getAssessmentName());
         }
         else {

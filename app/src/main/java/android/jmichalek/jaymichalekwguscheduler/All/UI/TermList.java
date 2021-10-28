@@ -1,22 +1,19 @@
 package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.collection.CircularArray;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Term;
 import android.jmichalek.jaymichalekwguscheduler.R;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
