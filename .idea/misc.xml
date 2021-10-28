@@ -10,11 +10,13 @@
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_course_screen.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_note_screen.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_add_term_screen.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_assessment_detail.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_course_detail.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_course_list.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_term_detail.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-land/activity_term_list.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout-sw600dp/activity_add_term_screen.xml" value="0.275" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_assessment_screen.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_course_screen.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/rnjay/AndroidStudioProjects/JayMichalekWGUScheduler/app/src/main/res/layout/activity_add_note_screen.xml" value="0.35260416666666666" />
@@ -41,5 +43,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.31040564373897706" />
+      </ProjectState>
+    </option>
   </component>
 </project>

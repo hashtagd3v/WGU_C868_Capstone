@@ -1,8 +1,13 @@
 package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
+import static android.jmichalek.jaymichalekwguscheduler.All.UI.MyReceiver.REQUEST_CODE;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.jmichalek.jaymichalekwguscheduler.All.Database.Repository;
 import android.jmichalek.jaymichalekwguscheduler.All.Entities.Assessment;
@@ -14,7 +19,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AssessmentDetail extends AppCompatActivity {
 
@@ -65,7 +74,7 @@ public class AssessmentDetail extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_options, menu);
+        getMenuInflater().inflate(R.menu.menu_assessmentoptions, menu);
         return true;
 
     }
@@ -79,9 +88,43 @@ public class AssessmentDetail extends AppCompatActivity {
                 this.finish();
                 return true;
             case R.id.assessment_notifyStart:
-                //TODO: Implement start notification.
+                String startDate = editStart.getText().toString();
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                Date myStartDate = null;
+                //Parse Start Date here:
+                try {
+                    if (!startDate.isEmpty())
+                        myStartDate = sdf.parse(startDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger = myStartDate.getTime();
+                //Set notification for start date here:
+                Intent intent = new Intent(AssessmentDetail.this, MyReceiver.class);
+                intent.putExtra("key", "Assessment has started.");
+                PendingIntent sender = PendingIntent.getBroadcast(AssessmentDetail.this, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, trigger, sender);
+                return true;
             case R.id.assessment_notifyEnd:
-                //TODO: Implement end notification.
+                String endDate = editEnd.getText().toString();
+                String myFormat2 = "MM/dd/yy";
+                SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+                Date myEndDate = null;
+                //Parse End Date here:
+                try {
+                    myEndDate = sdf2.parse(endDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Long trigger2 = myEndDate.getTime();
+                Intent secondIntent = new Intent(AssessmentDetail.this, MyReceiver.class);
+                secondIntent.putExtra("key", "Assessment has ended.");
+                PendingIntent sender2 = PendingIntent.getBroadcast(AssessmentDetail.this, REQUEST_CODE, secondIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager1 = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+                alarmManager1.set(AlarmManager.RTC_WAKEUP, trigger2, sender2);
+                return true;
 
         }
 

@@ -61,9 +61,7 @@ public class TermDetail extends AppCompatActivity {
         List<Course> allCourses = repository.getCoursesByTermId(current_termID);
 
         if (allCourses.isEmpty()) {
-
             Toast.makeText(TermDetail.this, "No Courses Available.", Toast.LENGTH_LONG).show();
-
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView_courseList);
@@ -100,7 +98,11 @@ public class TermDetail extends AppCompatActivity {
                 recyclerView.setAdapter(courseAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 courseAdapter.setCourse(allCourses);
-                Toast.makeText(TermDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
+                if (allCourses.isEmpty()) {
+                    Toast.makeText(TermDetail.this, "No Courses Available.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(TermDetail.this, "Refreshed.", Toast.LENGTH_LONG).show();
+                }
 
         }
 
@@ -138,7 +140,7 @@ public class TermDetail extends AppCompatActivity {
 
     }
 
-    /* This method deletes selected term from database.*/
+    /* This method deletes selected term from database. */
     public void deleteTerm(View view) {
 
         Term current_term;

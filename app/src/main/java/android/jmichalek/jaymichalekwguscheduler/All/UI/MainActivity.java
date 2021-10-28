@@ -18,19 +18,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Try code/DB test:
-//        Repository repository = new Repository(getApplication());
-//        Term term = new Term(0,"Term 1", "1/1/21", "3/30/21");
-//        repository.insert(term);
-//
-//        Course course = new Course(0, "Math 121", "10/24/21", "12/01/21", "Not started", "John Smith",
-//                "123-456-7891", "instructor@email.com", "Hello", 1);
-//        repository.insert(course);
-//
-//        Assessment assessment = new Assessment(0, "Assessment 1", "10/30/21", "10/31/21", 1);
-//        repository.insert(assessment);
+        Repository repository = new Repository(getApplication());
+        Term term = new Term(0,"Spring Term", "1/1/21", "3/30/21");
+        repository.insert(term);
+        Repository term_repository = new Repository(getApplication());
+        Term second_term = new Term(0,"Summer Term", "6/1/21", "8/31/21");
+        term_repository.insert(second_term);
 
-        //TODO: Add 2 terms, 2 courses, 2 assessments - dummy data
+        Repository course_repository1 = new Repository(getApplication());
+        Course course = new Course(0, "Potions", "10/31/21", "12/31/21", "Not started", "Severus Snape",
+                "123-456-7891", "severus@hogwarts.com", "Polyjuice Potion", 1);
+        course_repository1.insert(course);
+        Repository course_repository2 = new Repository(getApplication());
+        Course second_course = new Course(0, "Quidditch 101", "06/01/22", "08/31/22", "Not started", "Oliver Wood",
+                "123-456-7891", "wood@hogwarts.com", "Golden Snitch Practice", 1);
+        course_repository2.insert(second_course);
+
+        Repository assessment_repository1 = new Repository(getApplication());
+        Assessment assessment = new Assessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1);
+        assessment_repository1.insert(assessment);
+        Repository assessment_repository2 = new Repository(getApplication());
+        Assessment second_assessment = new Assessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1);
+        assessment_repository2.insert(second_assessment);
 
     }
 

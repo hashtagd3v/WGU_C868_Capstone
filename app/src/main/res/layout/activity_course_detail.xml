@@ -136,7 +136,7 @@
             <EditText
                 android:id="@+id/editText_email"
                 android:layout_width="200dp"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:hint="instructor@email.com" />
         </LinearLayout>
 
@@ -153,7 +153,7 @@
             <EditText
                 android:id="@+id/editText_note"
                 android:layout_width="200dp"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:hint="Type note here." />
         </LinearLayout>
 
@@ -185,7 +185,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_saveCourse" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_delete"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:text="@string/btn_delete"
@@ -205,11 +205,12 @@
         android:onClick="addAssessment"
         app:fabSize="mini"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_assessmentList"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.111"
-        app:srcCompat="@drawable/ic_add_foreground" />
+        app:srcCompat="@drawable/ic_add_foreground"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

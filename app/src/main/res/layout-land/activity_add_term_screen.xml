@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +23,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="12dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/btn_saveAssessment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -37,13 +36,13 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/assessmentText_name" />
+                        android:text="@string/addTermLabel_termTitle" />
 
                     <EditText
-                        android:id="@+id/assessmentEditText_name"
+                        android:id="@+id/editText_termTitle"
                         android:layout_width="200dp"
                         android:layout_height="50dp"
-                        android:hint="@string/assessmentText_title" />
+                        android:hint="@string/addTermHint_termTitle" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -54,10 +53,10 @@
                     <TextView
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/assessmentText_start_date" />
+                        android:text="@string/addTermLabel_termStartDate" />
 
                     <EditText
-                        android:id="@+id/assessmentEditText_start"
+                        android:id="@+id/editText_startDate"
                         android:layout_width="200dp"
                         android:layout_height="50dp"
                         android:hint="@string/hint_date" />
@@ -69,13 +68,12 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/assessmentTextView_end"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/assessmentText_end_date" />
+                        android:text="@string/addTermLabel_termEndDate" />
 
                     <EditText
-                        android:id="@+id/assessmentEditText_end"
+                        android:id="@+id/editText_endDate"
                         android:layout_width="200dp"
                         android:layout_height="50dp"
                         android:hint="@string/hint_date" />
@@ -83,15 +81,15 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_saveAssessment"
+                android:id="@+id/addTermScreen_saveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:onClick="saveAssessment"
+                android:layout_marginTop="32dp"
+                android:onClick="saveTerm"
                 android:text="@string/btn_save"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintHorizontal_bias="0.895"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                 app:layout_constraintVertical_bias="1.0" />
