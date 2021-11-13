@@ -6,7 +6,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "android.jmichalek.jaymichalekwguscheduler"
+        applicationId "android.jmichalek.jaymichalek_capstone"
         minSdk 26
         targetSdk 30
         versionCode 1
