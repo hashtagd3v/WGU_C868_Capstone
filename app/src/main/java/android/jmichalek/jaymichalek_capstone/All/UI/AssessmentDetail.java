@@ -26,16 +26,16 @@ import java.util.Locale;
 
 public class AssessmentDetail extends AppCompatActivity {
 
-    int currentCourseID;
-    int assessmentID;
-    String assessmentTitle;
-    String assessmentStart;
-    String assessmentEnd;
-    EditText editName;
-    EditText editStart;
-    EditText editEnd;
-    Repository repository;
-    List<Assessment> mAssessments;
+    private int currentCourseID;
+    private int assessmentID;
+    private String assessmentTitle;
+    private String assessmentStart;
+    private String assessmentEnd;
+    private EditText editName;
+    private EditText editStart;
+    private EditText editEnd;
+    private Repository repository;
+    private List<Assessment> mAssessments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

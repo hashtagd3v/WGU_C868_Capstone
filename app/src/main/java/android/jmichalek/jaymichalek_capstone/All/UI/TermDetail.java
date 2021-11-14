@@ -20,15 +20,15 @@ import java.util.List;
 
 public class TermDetail extends AppCompatActivity {
 
-    String termTitle;
-    String termStart;
-    String termEnd;
-    EditText editTermTitle;
-    EditText editTermStart;
-    EditText editTermEnd;
-    Repository repository;
-    List<Term> mTerms;
-    int current_termID;
+    private String termTitle;
+    private String termStart;
+    private String termEnd;
+    private EditText editTermTitle;
+    private EditText editTermStart;
+    private EditText editTermEnd;
+    private Repository repository;
+    private List<Term> mTerms;
+    private int current_termID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

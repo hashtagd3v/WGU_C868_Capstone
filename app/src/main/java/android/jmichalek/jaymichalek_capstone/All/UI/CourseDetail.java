@@ -29,26 +29,26 @@ import java.util.Locale;
 
 public class CourseDetail extends AppCompatActivity {
 
-    int courseID;
-    int currentTermID;
-    String courseTitle;
-    String courseStart;
-    String courseEnd;
-    String courseStatus;
-    String courseInstructor;
-    String phone;
-    String email;
-    String notes;
-    EditText editCourseTitle;
-    EditText editStart;
-    EditText editEnd;
-    EditText editStatus;
-    EditText editInstructor;
-    EditText editPhone;
-    EditText editEmail;
-    EditText editNotes;
-    Repository repository;
-    List<Course> mCourses;
+    private int courseID;
+    private int currentTermID;
+    private String courseTitle;
+    private String courseStart;
+    private String courseEnd;
+    private String courseStatus;
+    private String courseInstructor;
+    private String phone;
+    private String email;
+    private String notes;
+    private EditText editCourseTitle;
+    private EditText editStart;
+    private EditText editEnd;
+    private EditText editStatus;
+    private EditText editInstructor;
+    private EditText editPhone;
+    private EditText editEmail;
+    private EditText editNotes;
+    private Repository repository;
+    private List<Course> mCourses;
 
 
     @Override

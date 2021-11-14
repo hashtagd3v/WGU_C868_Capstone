@@ -13,14 +13,14 @@ import android.widget.Toast;
 
 public class AddAssessmentScreen extends AppCompatActivity {
 
-    int currentCourseID;
-    String assessmentTitle;
-    String assessmentStart;
-    String assessmentEnd;
-    EditText editName;
-    EditText editStart;
-    EditText editEnd;
-    Repository repository;
+    private int currentCourseID;
+    private String assessmentTitle;
+    private String assessmentStart;
+    private String assessmentEnd;
+    private EditText editName;
+    private EditText editStart;
+    private EditText editEnd;
+    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
