@@ -13,13 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class AddTermScreen extends AppCompatActivity {
 
-    String termTitle;
-    String termStart;
-    String termEnd;
-    EditText editTermTitle;
-    EditText editTermStart;
-    EditText editTermEnd;
-    Repository repository;
+    private String termTitle;
+    private String termStart;
+    private String termEnd;
+    private EditText editTermTitle;
+    private EditText editTermStart;
+    private EditText editTermEnd;
+    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
