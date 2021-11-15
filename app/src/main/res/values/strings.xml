@@ -43,4 +43,9 @@
     <string name="assessmentText_title">Assessment Title</string>
     <string name="assessmentText_start_date">Assessment Start Date:</string>
     <string name="assessmentText_end_date">Assessment End Date:</string>
+    <string name="assessmentText_type">Assessment Type</string>
+    <string-array name="assessmentType_array">
+        <item>Performance Assessment</item>
+        <item>Objective Assessment</item>
+    </string-array>
 </resources>

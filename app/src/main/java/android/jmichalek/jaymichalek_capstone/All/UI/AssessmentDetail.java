@@ -8,12 +8,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,18 +29,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class AssessmentDetail extends AppCompatActivity {
+public class AssessmentDetail extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int currentCourseID;
     private int assessmentID;
+    private boolean assessment_type;
     private String assessmentTitle;
     private String assessmentStart;
     private String assessmentEnd;
+    private String current_assessmentType;
     private EditText editName;
     private EditText editStart;
     private EditText editEnd;
+    private Spinner spinner_assessmentType;
     private Repository repository;
-    private List<Assessment> mAssessments;
+    private List<PerformanceAssessment> performanceAssessments;
+    private List<ObjectiveAssessment> objectiveAssessments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +63,27 @@ public class AssessmentDetail extends AppCompatActivity {
         assessmentTitle = getIntent().getStringExtra("name");
         assessmentStart = getIntent().getStringExtra("start");
         assessmentEnd = getIntent().getStringExtra("end");
+        current_assessmentType = getIntent().getStringExtra("type");
+        System.out.println("Current Type: " + current_assessmentType);
 
-        //Connect activity layout of edit text fields
+        //Connect activity layout of edit text fields:
         editName = findViewById(R.id.assessmentEditText_name);
         editStart = findViewById(R.id.assessmentEditText_start);
         editEnd = findViewById(R.id.assessmentEditText_end);
+
+        //Connect activity layout for spinner and set choices for assessment types from string resource:
+        spinner_assessmentType = findViewById(R.id.assessmentSpinner_type);
+        spinner_assessmentType.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessmentType_array, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_assessmentType.setAdapter(adapter);
+        //Set default selection to current assessment type:
+        if (current_assessmentType.equals("Performance Assessment")) {
+            spinner_assessmentType.setSelection(adapter.getPosition("Performance Assessment"));
+        }
+        else {
+            spinner_assessmentType.setSelection(adapter.getPosition("Objective Assessment"));
+        }
 
         //Set text fields with assessment's information:
         editName.setText(assessmentTitle);
@@ -134,8 +159,6 @@ public class AssessmentDetail extends AppCompatActivity {
     /* This method updates assessment details and saves to database. */
     public void updateAssessment(View view) {
 
-        Assessment assessment;
-
         assessmentTitle = editName.getText().toString();
         assessmentStart = editStart.getText().toString();
         assessmentEnd = editEnd.getText().toString();
@@ -146,46 +169,125 @@ public class AssessmentDetail extends AppCompatActivity {
 
         } else {
 
-            mAssessments = repository.getAssessmentsByCourseID(currentCourseID);
-            for (int i = 0; i < mAssessments.size(); i++) {
+            //value of true == performance assessment
+            if (current_assessmentType.equals("Performance Assessment")) {
 
-                assessment = mAssessments.get(i);
 
-                if (assessment.getAssessmentID() == assessmentID) {
+                performanceAssessments = repository.getPerformanceAssessmentsByCourseID(currentCourseID);
+                for (int i = 0; i < performanceAssessments.size(); i++) {
 
-                    assessment.setAssessmentName(assessmentTitle);
-                    assessment.setAssessmentStart(assessmentStart);
-                    assessment.setAssessmentEnd(assessmentEnd);
-                    repository.update(assessment);
-                    Toast.makeText(AssessmentDetail.this, "Assessment updated. Refresh previous screen.", Toast.LENGTH_LONG).show();
+                    PerformanceAssessment assessment;
+                    assessment = performanceAssessments.get(i);
+
+                    //Delete current assessment first to change assessment type when saving.
+
+                    if (assessment.getAssessmentID() == assessmentID) {
+
+                        repository.delete(assessment);
+
+                    }
+                }
+
+            }
+            else {
+
+                objectiveAssessments = repository.getObjectiveAssessmentsByCourseID(currentCourseID);
+                for (int i = 0; i < objectiveAssessments.size(); i++) {
+
+                    ObjectiveAssessment assessment;
+                    assessment = objectiveAssessments.get(i);
+
+                    //Delete current assessment first to change assessment type when saving.
+
+                    if (assessment.getAssessmentID() == assessmentID) {
+
+                        repository.delete(assessment);
+
+                    }
 
                 }
 
             }
+
         }
+
+            //Check if performance or objective type of assessment and create new proper assessment type:
+
+            if (assessment_type == true) {
+                PerformanceAssessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
+                repository.insert(performanceAssessment);
+            }
+            else {
+                ObjectiveAssessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
+                repository.insert(objectiveAssessment);
+            }
 
     }
 
     //This method deletes current assessment selected from database.
     public void deleteAssessment(View view) {
 
-        Assessment assessment;
+        if (current_assessmentType.equals("Performance Assessment")) {
 
-        mAssessments = repository.getAssessmentsByCourseID(currentCourseID);
-        for (int i = 0; i < mAssessments.size(); i++) {
 
-            assessment = mAssessments.get(i);
+            performanceAssessments = repository.getPerformanceAssessmentsByCourseID(currentCourseID);
+            for (int i = 0; i < performanceAssessments.size(); i++) {
 
-            if (assessment.getAssessmentID() == assessmentID) {
+                PerformanceAssessment assessment;
+                assessment = performanceAssessments.get(i);
 
-                repository.delete(assessment);
-                Toast.makeText(AssessmentDetail.this, "Assessment deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
-                break;
+                //Delete current assessment first to change assessment type when saving.
 
+                if (assessment.getAssessmentID() == assessmentID) {
+
+                    repository.delete(assessment);
+
+                }
             }
 
         }
+        else {
 
+            objectiveAssessments = repository.getObjectiveAssessmentsByCourseID(currentCourseID);
+            for (int i = 0; i < objectiveAssessments.size(); i++) {
+
+                ObjectiveAssessment assessment;
+                assessment = objectiveAssessments.get(i);
+
+                //Delete current assessment first to change assessment type when saving.
+
+                if (assessment.getAssessmentID() == assessmentID) {
+
+                    repository.delete(assessment);
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+
+        String selectedString = String.valueOf(adapterView.getItemAtPosition(pos));
+
+        if (selectedString.equals("Performance Assessment")) {
+            //value of true == performance assessment
+            assessment_type = true;
+        } else {
+            //value of false == objective assessment
+            assessment_type = false;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        //Do nothing.
     }
 
 }
