@@ -2,7 +2,8 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.AssessmentViewHolder> {
+public class ObjectiveAssessmentAdapter extends RecyclerView.Adapter<ObjectiveAssessmentAdapter.AssessmentViewHolder> {
 
-    private List<Assessment> mAssessment;
+    private List<ObjectiveAssessment> mAssessment;
     private final Context context;
     private final LayoutInflater mInflater;
 
@@ -31,20 +32,21 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    final Assessment current = mAssessment.get(position);
+                    final ObjectiveAssessment current = mAssessment.get(position);
                     Intent intent = new Intent(context, AssessmentDetail.class);
                     intent.putExtra("assessment_id", current.getAssessmentID());
                     intent.putExtra("name", current.getAssessmentName());
                     intent.putExtra("start", current.getAssessmentStart());
                     intent.putExtra("end", current.getAssessmentEnd());
                     intent.putExtra("course", current.getCourseID());
+                    intent.putExtra("type", current.getType());
                     context.startActivity(intent);
                 }
             });
         }
     }
 
-    public AssessmentAdapter(Context context) {
+    public ObjectiveAssessmentAdapter(Context context) {
 
         mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -53,7 +55,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     @NonNull
     @Override
-    public AssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ObjectiveAssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = mInflater.inflate(R.layout.assessment_item_row, parent, false);
 
@@ -62,10 +64,10 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AssessmentAdapter.AssessmentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ObjectiveAssessmentAdapter.AssessmentViewHolder holder, int position) {
 
         if (mAssessment != null) {
-            Assessment current = mAssessment.get(position);
+            ObjectiveAssessment current = mAssessment.get(position);
             holder.rowItemAssessment.setText(current.getAssessmentName());
         }
         else {
@@ -74,7 +76,7 @@ public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.As
 
     }
 
-    public void setAssessment(List<Assessment> assessments) {
+    public void setAssessment(List<ObjectiveAssessment> assessments) {
 
         mAssessment = assessments;
         notifyDataSetChanged();

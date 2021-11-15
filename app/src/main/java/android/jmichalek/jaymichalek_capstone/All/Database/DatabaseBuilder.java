@@ -3,21 +3,27 @@ package android.jmichalek.jaymichalek_capstone.All.Database;
 import android.content.Context;
 import android.jmichalek.jaymichalek_capstone.All.DAO.AssessmentDAO;
 import android.jmichalek.jaymichalek_capstone.All.DAO.CourseDAO;
+import android.jmichalek.jaymichalek_capstone.All.DAO.ObjectiveAssessmentDAO;
+import android.jmichalek.jaymichalek_capstone.All.DAO.PerformanceAssessmentDAO;
 import android.jmichalek.jaymichalek_capstone.All.DAO.TermDAO;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
+import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Term.class, Course.class, Assessment.class}, version = 5, exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class, PerformanceAssessment.class, ObjectiveAssessment.class}, version = 10, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
     public abstract AssessmentDAO assessmentDAO();
+    public abstract PerformanceAssessmentDAO performanceAssessmentDAO();
+    public abstract ObjectiveAssessmentDAO objectiveAssessmentDAO();
 
     private static volatile DatabaseBuilder INSTANCE;
 

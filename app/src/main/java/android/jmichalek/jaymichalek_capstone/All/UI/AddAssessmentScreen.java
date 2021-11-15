@@ -3,23 +3,29 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class AddAssessmentScreen extends AppCompatActivity {
+public class AddAssessmentScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private int currentCourseID;
     private String assessmentTitle;
     private String assessmentStart;
     private String assessmentEnd;
+    private boolean assessment_type;
     private EditText editName;
     private EditText editStart;
     private EditText editEnd;
+    private Spinner spinner_assessmentType;
     private Repository repository;
 
     @Override
@@ -38,6 +44,13 @@ public class AddAssessmentScreen extends AppCompatActivity {
         editName = findViewById(R.id.assessmentEditText_name);
         editStart = findViewById(R.id.assessmentEditText_start);
         editEnd = findViewById(R.id.assessmentEditText_end);
+
+        //Connect activity layout for spinner and set choices for assessment types from string resource:
+        spinner_assessmentType = findViewById(R.id.addassessmentSpinner_type);
+        spinner_assessmentType.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessmentType_array, android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_assessmentType.setAdapter(adapter);
 
         repository = new Repository(getApplication());
 
@@ -72,11 +85,43 @@ public class AddAssessmentScreen extends AppCompatActivity {
         }
         else {
 
-            Assessment assessment = new Assessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
-            repository.insert(assessment);
+            //Check assessment type selected:
+
+            if (assessment_type == true) {
+                PerformanceAssessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
+                repository.insert(performanceAssessment);
+            }
+            else {
+                ObjectiveAssessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
+                repository.insert(objectiveAssessment);
+            }
+
             Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
         }
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
+
+        String selectedString = String.valueOf(adapterView.getItemAtPosition(pos));
+        System.out.println("Selected string: " + selectedString);
+
+        if (selectedString.equals("Performance Assessment")) {
+            //value of true == performance assessment
+            assessment_type = true;
+        } else {
+            //value of false == objective assessment
+            assessment_type = false;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+        //Do nothing.
 
     }
 

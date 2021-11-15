@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
+import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
@@ -35,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
 //        course_repository2.insert(second_course);
 //
 //        Repository assessment_repository1 = new Repository(getApplication());
-//        Assessment assessment = new Assessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1);
+//        PerformanceAssessment assessment = new PerformanceAssessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1);
 //        assessment_repository1.insert(assessment);
 //        Repository assessment_repository2 = new Repository(getApplication());
-//        Assessment second_assessment = new Assessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1);
+//        ObjectiveAssessment second_assessment = new ObjectiveAssessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1);
 //        assessment_repository2.insert(second_assessment);
 
     }
