@@ -241,6 +241,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
                 if (assessment.getAssessmentID() == assessmentID) {
 
                     repository.delete(assessment);
+                    Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -259,6 +260,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
                 if (assessment.getAssessmentID() == assessmentID) {
 
                     repository.delete(assessment);
+                    Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
 
                 }
 

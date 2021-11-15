@@ -3,7 +3,6 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.R;
@@ -26,7 +25,7 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
     private EditText editName;
     private EditText editStart;
     private EditText editEnd;
-    private Spinner assessmentType;
+    private Spinner spinner_assessmentType;
     private Repository repository;
 
     @Override
@@ -47,11 +46,11 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         editEnd = findViewById(R.id.assessmentEditText_end);
 
         //Connect activity layout for spinner and set choices for assessment types from string resource:
-        assessmentType = findViewById(R.id.addassessmentSpinner_type);
-        assessmentType.setOnItemSelectedListener(this);
+        spinner_assessmentType = findViewById(R.id.addassessmentSpinner_type);
+        spinner_assessmentType.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessmentType_array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        assessmentType.setAdapter(adapter);
+        spinner_assessmentType.setAdapter(adapter);
 
         repository = new Repository(getApplication());
 
@@ -109,7 +108,7 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         String selectedString = String.valueOf(adapterView.getItemAtPosition(pos));
         System.out.println("Selected string: " + selectedString);
 
-        if (selectedString == "Performance Assessment") {
+        if (selectedString.equals("Performance Assessment")) {
             //value of true == performance assessment
             assessment_type = true;
         } else {
@@ -121,7 +120,9 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
         //Do nothing.
+
     }
 
 }

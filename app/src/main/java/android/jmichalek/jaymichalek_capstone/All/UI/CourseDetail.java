@@ -51,7 +51,6 @@ public class CourseDetail extends AppCompatActivity {
     private EditText editNotes;
     private Repository repository_performance;
     private Repository repository_objective;
-    private Repository repository;
     private List<Course> mCourses;
 
 
@@ -104,10 +103,6 @@ public class CourseDetail extends AppCompatActivity {
         repository_performance = new Repository(getApplication());
         List<PerformanceAssessment> allPerformanceAssessments = repository_performance.getPerformanceAssessmentsByCourseID(courseID);
 
-        if (allPerformanceAssessments.isEmpty()) {
-            Toast.makeText(CourseDetail.this, "No Performance Assessments Available.", Toast.LENGTH_LONG).show();
-        }
-
         RecyclerView recyclerView_performance = findViewById(R.id.recyclerView_performanceList);
         final PerformanceAssessmentAdapter performanceAssessmentAdapter = new PerformanceAssessmentAdapter(this);
         recyclerView_performance.setAdapter(performanceAssessmentAdapter);
@@ -119,15 +114,27 @@ public class CourseDetail extends AppCompatActivity {
         repository_objective = new Repository(getApplication());
         List<ObjectiveAssessment> allObjectiveAssessments = repository_objective.getObjectiveAssessmentsByCourseID(courseID);
 
-        if (allObjectiveAssessments.isEmpty()) {
-            Toast.makeText(CourseDetail.this, "No Objective Assessments Available.", Toast.LENGTH_LONG).show();
-        }
-
         RecyclerView recyclerView_objective = findViewById(R.id.recyclerView_objectiveList);
         final ObjectiveAssessmentAdapter objectiveAssessmentAdapter = new ObjectiveAssessmentAdapter(this);
         recyclerView_objective.setAdapter(objectiveAssessmentAdapter);
         recyclerView_objective.setLayoutManager(new LinearLayoutManager(this));
         objectiveAssessmentAdapter.setAssessment(allObjectiveAssessments);
+
+        //Check which toast to show:
+        Toast t;
+
+        if (allPerformanceAssessments.isEmpty() && allObjectiveAssessments.isEmpty()) {
+
+            t = Toast.makeText(this, "No Assessments to list", Toast.LENGTH_LONG);
+            t.show();
+
+        } else if (allPerformanceAssessments.isEmpty() && !allObjectiveAssessments.isEmpty()) {
+            t = Toast.makeText(this, "No Performance Assessment for this course.", Toast.LENGTH_LONG);
+            t.show();
+        } else {
+            t = Toast.makeText(this, "No Objective Assessment for this course.", Toast.LENGTH_LONG);
+            t.show();
+        }
 
 
     }
@@ -206,12 +213,6 @@ public class CourseDetail extends AppCompatActivity {
                 recyclerView.setAdapter(performanceAssessmentAdapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 performanceAssessmentAdapter.setAssessment(allPerformanceAssessments);
-                if (allPerformanceAssessments.isEmpty()) {
-                    Toast.makeText(CourseDetail.this, "No Performance Assessments Available.", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(CourseDetail.this, "Refreshed Performance Assessment List.", Toast.LENGTH_LONG).show();
-                }
 
                 //Refresh objective list next:
 
@@ -222,11 +223,24 @@ public class CourseDetail extends AppCompatActivity {
                 recyclerView1.setAdapter(objectiveAssessmentAdapter);
                 recyclerView1.setLayoutManager(new LinearLayoutManager(this));
                 objectiveAssessmentAdapter.setAssessment(allObjectiveAssessments);
-                if (allObjectiveAssessments.isEmpty()) {
-                    Toast.makeText(CourseDetail.this, "No Objective Assessments Available.", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(CourseDetail.this, "Refreshed Objective Assessment List.", Toast.LENGTH_LONG).show();
+
+                //Check which toast to show:
+                Toast t;
+
+                if (allPerformanceAssessments.isEmpty() && allObjectiveAssessments.isEmpty()) {
+
+                    t = Toast.makeText(this, "No Assessments to list", Toast.LENGTH_LONG);
+                    t.show();
+
+                } else if (allPerformanceAssessments.isEmpty() && !allObjectiveAssessments.isEmpty()) {
+                    t = Toast.makeText(this, "No Performance Assessment for this course.", Toast.LENGTH_LONG);
+                    t.show();
+                } else if (!allPerformanceAssessments.isEmpty() && allObjectiveAssessments.isEmpty()) {
+                    t = Toast.makeText(this, "No Objective Assessment for this course.", Toast.LENGTH_LONG);
+                    t.show();
+                } else {
+                    t = Toast.makeText(this, "Refreshed.", Toast.LENGTH_LONG);
+                    t.show();
                 }
 
         }
@@ -257,6 +271,7 @@ public class CourseDetail extends AppCompatActivity {
 
         } else {
 
+            Repository repository = new Repository(getApplication());
             mCourses = repository.getCoursesByTermId(currentTermID);
             for (int i = 0; i < mCourses.size(); i++) {
 
@@ -282,11 +297,11 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
-    // This method enables user to delete course from database. //FIXME!!!! CRASHES APP WHEN DELETE BUTTON IS CLICKED.
+    // This method enables user to delete course from database.
     public void deleteCourse(View view) {
 
         Course current_course;
-
+        Repository repository = new Repository(getApplication());
         mCourses = repository.getCoursesByTermId(currentTermID);         
         for(int i = 0; i < mCourses.size(); i++) {
 
@@ -294,9 +309,12 @@ public class CourseDetail extends AppCompatActivity {
 
             if (current_course.getCourseID() == courseID) {
 
-                List<Assessment> assessments = repository.getAssessmentsByCourseID(courseID);
+                Repository repository_performance = new Repository(getApplication());
+                List<PerformanceAssessment> performance_assessments = repository_performance.getPerformanceAssessmentsByCourseID(courseID);
+                Repository repository_objective = new Repository(getApplication());
+                List<ObjectiveAssessment> objective_assessments = repository_objective.getObjectiveAssessmentsByCourseID(courseID);
 
-                if (assessments.isEmpty()) {
+                if (performance_assessments.isEmpty() && objective_assessments.isEmpty()) {
 
                     repository.delete(current_course);
                     Toast.makeText(CourseDetail.this, "Course deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
