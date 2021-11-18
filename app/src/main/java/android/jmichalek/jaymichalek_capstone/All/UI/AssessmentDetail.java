@@ -43,6 +43,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
     private EditText editEnd;
     private Spinner spinner_assessmentType;
     private Repository repository;
+    private Repository all_repository;
     private List<PerformanceAssessment> performanceAssessments;
     private List<ObjectiveAssessment> objectiveAssessments;
 
@@ -169,6 +170,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
 
         } else {
 
+            //Check what type of assessment:
             //value of true == performance assessment
             if (current_assessmentType.equals("Performance Assessment")) {
 
@@ -212,20 +214,39 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         }
 
             //Check if performance or objective type of assessment and create new proper assessment type:
+            //Used Downcasting for polymorphism requirement:                                        //TODO: SHOW ONLY ONE RECYCLER VIEW WILL BOTH TYPES OF ASSESSMENT.
 
             if (assessment_type == true) {
-                PerformanceAssessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
-                repository.insert(performanceAssessment);
+                //Change type of assessment prior to saving based on user selection from spinner:
+                String changeType = "Performance Assessment";
+                Assessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType);
+                PerformanceAssessment castedPerformance = (PerformanceAssessment) performanceAssessment;
+                //Insert assessment to database performance_assessment table (Performance child type):
+                repository.insert(castedPerformance);
+                Repository addToAssessment = new Repository(getApplication());
+                //Insert assessment to database assessment_table (Assessment parent type):
+                addToAssessment.insert(performanceAssessment);
+
             }
             else {
-                ObjectiveAssessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
-                repository.insert(objectiveAssessment);
+                //Change type of assessment prior to saving based on user selection from spinner:
+                String changeType = "Objective Assessment";
+                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType);
+                ObjectiveAssessment castedObjective = (ObjectiveAssessment) objectiveAssessment;
+                //Insert assessment to database objective_assessment table (Objective child type):
+                repository.insert(castedObjective);
+                Repository addToAssessment = new Repository(getApplication());
+                //Insert assessment to database assessment_table (Assessment parent type):
+                addToAssessment.insert(objectiveAssessment);
             }
 
     }
 
     //This method deletes current assessment selected from database.
     public void deleteAssessment(View view) {
+        //FIXME: DELETE option type. Fix d/t changes from downcasting above. ALSO DELETE FROM ASSESSMENT TABLE!!!
+
+        //TODO: Add getALLAssessments() for loop to delete from assessment_table too.
 
         if (current_assessmentType.equals("Performance Assessment")) {
 
