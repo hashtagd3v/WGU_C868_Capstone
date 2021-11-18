@@ -5,9 +5,9 @@ import androidx.room.Entity;
 @Entity(tableName = "performance_assessment")
 public class PerformanceAssessment extends Assessment{
 
-    private String type = "Performance Assessment";
+    private String type;
 
-    public PerformanceAssessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, int courseID) {
+    public PerformanceAssessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, int courseID, String type) {
         super(assessmentID, assessmentName, assessmentStart, assessmentEnd, courseID);
         this.type = type;
     }

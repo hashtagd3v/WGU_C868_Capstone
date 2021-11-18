@@ -3,6 +3,7 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
+import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.R;
@@ -21,6 +22,7 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
     private String assessmentTitle;
     private String assessmentStart;
     private String assessmentEnd;
+    private String selectedString;
     private boolean assessment_type;
     private EditText editName;
     private EditText editStart;
@@ -85,15 +87,26 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         }
         else {
 
-            //Check assessment type selected:
+            //Check assessment type selected (used Downcasting for polymorphism):
 
             if (assessment_type == true) {
-                PerformanceAssessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
-                repository.insert(performanceAssessment);
+                Assessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString);
+                PerformanceAssessment castedPerformance = (PerformanceAssessment) performanceAssessment;
+                //Insert assessment to database performance_assessment table (Performance child type):
+                repository.insert(castedPerformance);
+                Repository addToAssessment = new Repository(getApplication());
+                //Insert assessment to database assessment_table (Assessment parent type):
+                addToAssessment.insert(performanceAssessment);
+
             }
             else {
-                ObjectiveAssessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID);
-                repository.insert(objectiveAssessment);
+                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString);
+                ObjectiveAssessment castedObjective = (ObjectiveAssessment) objectiveAssessment;
+                //Insert assessment to database objective_assessment table (Objective child type):
+                repository.insert(castedObjective);
+                Repository addToAssessment = new Repository(getApplication());
+                //Insert assessment to database assessment_table (Assessment parent type):
+                addToAssessment.insert(objectiveAssessment);
             }
 
             Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
@@ -105,8 +118,8 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
 
-        String selectedString = String.valueOf(adapterView.getItemAtPosition(pos));
-        System.out.println("Selected string: " + selectedString);
+        //Grab user selection from spinner if Performance of Objective type:
+        selectedString = String.valueOf(adapterView.getItemAtPosition(pos));
 
         if (selectedString.equals("Performance Assessment")) {
             //value of true == performance assessment

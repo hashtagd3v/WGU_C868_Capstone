@@ -37,10 +37,6 @@ public class Assessment {
         return assessmentID;
     }
 
-    public void setAssessmentID(int assessmentID) {
-        this.assessmentID = assessmentID;
-    }
-
     public String getAssessmentName() {
         return assessmentName;
     }
