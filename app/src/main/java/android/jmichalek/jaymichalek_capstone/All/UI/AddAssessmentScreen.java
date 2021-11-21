@@ -1,6 +1,7 @@
 package android.jmichalek.jaymichalek_capstone.All.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Dao;
 
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
@@ -87,25 +88,17 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         }
         else {
 
-            //Check assessment type selected (used Downcasting for polymorphism):
+            //Check assessment type selected (used Upcasting for polymorphism):
 
             if (assessment_type == true) {
-                Assessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString);
-                PerformanceAssessment castedPerformance = (PerformanceAssessment) performanceAssessment;
-                //Insert assessment to database performance_assessment table (Performance child type):
-                repository.insert(castedPerformance);
+                Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
                 Repository addToAssessment = new Repository(getApplication());
-                //Insert assessment to database assessment_table (Assessment parent type):
                 addToAssessment.insert(performanceAssessment);
 
             }
             else {
-                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString);
-                ObjectiveAssessment castedObjective = (ObjectiveAssessment) objectiveAssessment;
-                //Insert assessment to database objective_assessment table (Objective child type):
-                repository.insert(castedObjective);
+                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
                 Repository addToAssessment = new Repository(getApplication());
-                //Insert assessment to database assessment_table (Assessment parent type):
                 addToAssessment.insert(objectiveAssessment);
             }
 

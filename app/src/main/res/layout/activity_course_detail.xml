@@ -137,7 +137,8 @@
                 android:id="@+id/editText_email"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:hint="instructor@email.com" />
+                android:hint="instructor@email.com"
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -154,7 +155,8 @@
                 android:id="@+id/editText_note"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:hint="Type note here." />
+                android:hint="Type note here."
+                tools:ignore="TouchTargetSizeCheck" />
         </LinearLayout>
 
     </LinearLayout>
@@ -170,16 +172,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.026"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_performanceList"
+        android:id="@+id/recyclerView_assessmentList"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="230dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,12 +195,13 @@
         android:layout_height="40dp"
         android:onClick="deleteCourse"
         android:text="@string/btn_delete"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_performanceList"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_assessmentList"
         app:layout_constraintEnd_toStartOf="@+id/btn_saveCourse"
         app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintVertical_bias="0.213"
+        tools:ignore="TouchTargetSizeCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_addAssessment"
@@ -205,7 +210,7 @@
         android:clickable="true"
         android:onClick="addAssessment"
         app:fabSize="mini"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_performanceList"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView_assessmentList"
         app:layout_constraintEnd_toStartOf="@+id/btn_delete"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
@@ -213,41 +218,5 @@
         app:layout_constraintVertical_bias="0.111"
         app:srcCompat="@drawable/ic_add_foreground"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_objectiveList"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_performanceList" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Performance Assessment:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_performanceList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_delete"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Objective Assessment:"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_objectiveList"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView_performanceList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

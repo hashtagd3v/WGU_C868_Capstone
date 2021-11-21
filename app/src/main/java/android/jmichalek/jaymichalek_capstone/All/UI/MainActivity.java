@@ -36,24 +36,14 @@ public class MainActivity extends AppCompatActivity {
 //                "123-456-7891", "wood@hogwarts.com", "Golden Snitch Practice", 1);
 //        course_repository2.insert(second_course);
 //
-//        Used Downcasting for polymorphism: //TODO: Test me first!!!
-
-//        Repository addPerformance = new Repository(getApplication());
-//        Assessment assessment = new PerformanceAssessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1. "Performance Assessment");
-//        PerformanceAssessment castedPerformance = (PerformanceAssessment) assessment;
-//        //Insert assessment to database performance_assessment table (Performance child type):
-//        addPerformance.insert(castedPerformance);
+////        Used Upcasting for polymorphism:
+//
+//        Assessment assessment = (Assessment) new PerformanceAssessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1,"Performance Assessment", 0);
 //        Repository addToAssessment1 = new Repository(getApplication());
-//        //Insert assessment to database assessment_table (Assessment parent type):
 //        addToAssessment1.insert(assessment);
 //
-//        Repository addObjective = new Repository(getApplication());
-//        Assessment second_assessment = new ObjectiveAssessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1, "Objective Assessment");
-//        ObjectiveAssessment castedObjective = (ObjectiveAssessment) second_assessment;
-//        //Insert assessment to database objective_assessment table (Objective child type):
-//        addObjective.insert(castedObjective);
+//        Assessment second_assessment = (Assessment) new ObjectiveAssessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1,"Objective Assessment", 0);
 //        Repository addToAssessment2 = new Repository(getApplication());
-//        //Insert assessment to database assessment_table (Assessment parent type):
 //        addToAssessment2.insert(second_assessment);
 
     }

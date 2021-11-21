@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface PerformanceAssessmentDAO {
 
-    @Insert(onConflict= OnConflictStrategy.IGNORE)
+    @Insert(onConflict= OnConflictStrategy.REPLACE)
     void insert(PerformanceAssessment performanceAssessment);
 
     @Update

@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface AssessmentDAO {
 
-    @Insert(onConflict= OnConflictStrategy.IGNORE)
+    @Insert(onConflict= OnConflictStrategy.REPLACE)
     void insert(Assessment assessment);
 
     @Update
@@ -26,7 +26,7 @@ public interface AssessmentDAO {
     @Query("DELETE from assessment_table")
     void deleteAllAssessments();
 
-    @Query("SELECT * FROM assessment_table ORDER BY assessmentID ASC")
+    @Query("SELECT * FROM assessment_table ORDER BY assessment_id ASC")
     List<Assessment> getAllAssessments();
 
     @Query("SELECT * FROM assessment_table WHERE courseID = :courseId")
