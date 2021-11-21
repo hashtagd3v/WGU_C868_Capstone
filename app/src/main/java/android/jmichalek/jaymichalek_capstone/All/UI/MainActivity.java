@@ -1,17 +1,11 @@
 package android.jmichalek.jaymichalek_capstone.All.UI;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
-import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
-import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
-import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 

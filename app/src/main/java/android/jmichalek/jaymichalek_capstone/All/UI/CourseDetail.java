@@ -256,14 +256,12 @@ public class CourseDetail extends AppCompatActivity {
 
             if (current_course.getCourseID() == courseID) {
 
-                Repository repository_performance = new Repository(getApplication());
-                List<PerformanceAssessment> performance_assessments = repository_performance.getPerformanceAssessmentsByCourseID(courseID);
-                Repository repository_objective = new Repository(getApplication());
-                List<ObjectiveAssessment> objective_assessments = repository_objective.getObjectiveAssessmentsByCourseID(courseID);
+                Repository repository_assessments = new Repository(getApplication());
+                List<Assessment> assessments = repository_assessments.getAssessmentsByCourseID(courseID);
 
-                if (performance_assessments.isEmpty() && objective_assessments.isEmpty()) {
+                if (assessments.isEmpty()) {
 
-                    repository.delete(current_course);
+                    repository_assessments.delete(current_course);
                     Toast.makeText(CourseDetail.this, "Course deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
 
                 }
