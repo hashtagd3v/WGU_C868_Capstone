@@ -1,5 +1,6 @@
 package android.jmichalek.jaymichalek_capstone.All.Entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,34 +8,38 @@ import androidx.room.PrimaryKey;
 public class Assessment {
 
     @PrimaryKey(autoGenerate = true)
-    private int assessmentID;
+    @ColumnInfo(name = "assessment_id")
+    private final int assessment_id;
 
     private String assessmentName;
     private String assessmentStart;
     private String assessmentEnd;
     private int courseID;
+    private String type;
 
-    public Assessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, int courseID) {
-        this.assessmentID = assessmentID;
+    public Assessment(int assessment_id, String assessmentName, String assessmentStart, String assessmentEnd, int courseID, String type) {
+        this.assessment_id = assessment_id;
         this.assessmentName = assessmentName;
         this.assessmentStart = assessmentStart;
         this.assessmentEnd = assessmentEnd;
         this.courseID = courseID;
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Assessment{" +
-                "assessmentID=" + assessmentID +
+                "assessment_id=" + assessment_id +
                 ", assessmentName='" + assessmentName + '\'' +
                 ", assessmentStart='" + assessmentStart + '\'' +
-                ", assessmentDate='" + assessmentEnd + '\'' +
+                ", assessmentEnd='" + assessmentEnd + '\'' +
                 ", courseID=" + courseID +
+                ", type='" + type + '\'' +
                 '}';
     }
 
-    public int getAssessmentID() {
-        return assessmentID;
+    public int getAssessment_id() {
+        return assessment_id;
     }
 
     public String getAssessmentName() {
@@ -67,6 +72,14 @@ public class Assessment {
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

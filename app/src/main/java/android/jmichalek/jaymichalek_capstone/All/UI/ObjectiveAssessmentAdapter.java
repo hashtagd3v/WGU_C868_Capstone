@@ -34,7 +34,7 @@ public class ObjectiveAssessmentAdapter extends RecyclerView.Adapter<ObjectiveAs
                     int position = getAdapterPosition();
                     final ObjectiveAssessment current = mAssessment.get(position);
                     Intent intent = new Intent(context, AssessmentDetail.class);
-                    intent.putExtra("assessment_id", current.getAssessmentID());
+                    intent.putExtra("assessment_id", current.getAssessment_id());
                     intent.putExtra("name", current.getAssessmentName());
                     intent.putExtra("start", current.getAssessmentStart());
                     intent.putExtra("end", current.getAssessmentEnd());

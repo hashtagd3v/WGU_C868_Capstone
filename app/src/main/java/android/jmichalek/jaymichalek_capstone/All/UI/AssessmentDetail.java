@@ -43,9 +43,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
     private EditText editEnd;
     private Spinner spinner_assessmentType;
     private Repository repository;
-    private Repository all_repository;
-    private List<PerformanceAssessment> performanceAssessments;
-    private List<ObjectiveAssessment> objectiveAssessments;
+    private List<Assessment> assessmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         assessmentStart = getIntent().getStringExtra("start");
         assessmentEnd = getIntent().getStringExtra("end");
         current_assessmentType = getIntent().getStringExtra("type");
-        System.out.println("Current Type: " + current_assessmentType);
+        System.out.println(current_assessmentType);
 
         //Connect activity layout of edit text fields:
         editName = findViewById(R.id.assessmentEditText_name);
@@ -170,127 +168,62 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
 
         } else {
 
-            //Check what type of assessment:
-            //value of true == performance assessment
-            if (current_assessmentType.equals("Performance Assessment")) {
+            assessmentList = repository.getAssessmentsByCourseID(currentCourseID);
+            for (int i = 0; i < assessmentList.size(); i++) {
 
+                Assessment assessment = assessmentList.get(i);
 
-                performanceAssessments = repository.getPerformanceAssessmentsByCourseID(currentCourseID);
-                for (int i = 0; i < performanceAssessments.size(); i++) {
-
-                    PerformanceAssessment assessment;
-                    assessment = performanceAssessments.get(i);
-
-                    //Delete current assessment first to change assessment type when saving.
-
-                    if (assessment.getAssessmentID() == assessmentID) {
-
-                        repository.delete(assessment);
-
-                    }
-                }
-
-            }
-            else {
-
-                objectiveAssessments = repository.getObjectiveAssessmentsByCourseID(currentCourseID);
-                for (int i = 0; i < objectiveAssessments.size(); i++) {
-
-                    ObjectiveAssessment assessment;
-                    assessment = objectiveAssessments.get(i);
-
-                    //Delete current assessment first to change assessment type when saving.
-
-                    if (assessment.getAssessmentID() == assessmentID) {
-
-                        repository.delete(assessment);
-
-                    }
-
-                }
-
-            }
-
-        }
-
-            //Check if performance or objective type of assessment and create new proper assessment type:
-            //Used Downcasting for polymorphism requirement:                                        //TODO: SHOW ONLY ONE RECYCLER VIEW WILL BOTH TYPES OF ASSESSMENT.
-
-            if (assessment_type == true) {
-                //Change type of assessment prior to saving based on user selection from spinner:
-                String changeType = "Performance Assessment";
-                Assessment performanceAssessment = new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType);
-                PerformanceAssessment castedPerformance = (PerformanceAssessment) performanceAssessment;
-                //Insert assessment to database performance_assessment table (Performance child type):
-                repository.insert(castedPerformance);
-                Repository addToAssessment = new Repository(getApplication());
-                //Insert assessment to database assessment_table (Assessment parent type):
-                addToAssessment.insert(performanceAssessment);
-
-            }
-            else {
-                //Change type of assessment prior to saving based on user selection from spinner:
-                String changeType = "Objective Assessment";
-                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType);
-                ObjectiveAssessment castedObjective = (ObjectiveAssessment) objectiveAssessment;
-                //Insert assessment to database objective_assessment table (Objective child type):
-                repository.insert(castedObjective);
-                Repository addToAssessment = new Repository(getApplication());
-                //Insert assessment to database assessment_table (Assessment parent type):
-                addToAssessment.insert(objectiveAssessment);
-            }
-
-    }
-
-    //This method deletes current assessment selected from database.
-    public void deleteAssessment(View view) {
-        //FIXME: DELETE option type. Fix d/t changes from downcasting above. ALSO DELETE FROM ASSESSMENT TABLE!!!
-
-        //TODO: Add getALLAssessments() for loop to delete from assessment_table too.
-
-        if (current_assessmentType.equals("Performance Assessment")) {
-
-
-            performanceAssessments = repository.getPerformanceAssessmentsByCourseID(currentCourseID);
-            for (int i = 0; i < performanceAssessments.size(); i++) {
-
-                PerformanceAssessment assessment;
-                assessment = performanceAssessments.get(i);
-
-                //Delete current assessment first to change assessment type when saving.
-
-                if (assessment.getAssessmentID() == assessmentID) {
+                if (assessment.getAssessment_id() == assessmentID) {
 
                     repository.delete(assessment);
-                    Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
+
+                 }
 
                 }
+
             }
+
+        //Check if performance or objective type of assessment and create new proper assessment type:
+        //Used Downcasting for polymorphism requirement:
+
+        if (assessment_type == true) {
+            //Change type of assessment prior to saving based on user selection from spinner:
+            String changeType = "Performance Assessment";
+            Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+            Repository addToAssessment = new Repository(getApplication());
+            addToAssessment.insert(performanceAssessment);
 
         }
         else {
-
-            objectiveAssessments = repository.getObjectiveAssessmentsByCourseID(currentCourseID);
-            for (int i = 0; i < objectiveAssessments.size(); i++) {
-
-                ObjectiveAssessment assessment;
-                assessment = objectiveAssessments.get(i);
-
-                //Delete current assessment first to change assessment type when saving.
-
-                if (assessment.getAssessmentID() == assessmentID) {
-
-                    repository.delete(assessment);
-                    Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
-
-                }
-
+            //Change type of assessment prior to saving based on user selection from spinner:
+            String changeType = "Objective Assessment";
+            Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+            Repository addToAssessment = new Repository(getApplication());
+            addToAssessment.insert(objectiveAssessment);
             }
 
+        }
+
+
+    //This method deletes current assessment selected from database.
+    public void deleteAssessment(View view) {
+
+        assessmentList = repository.getAssessmentsByCourseID(currentCourseID);
+        for (int i = 0; i < assessmentList.size(); i++) {
+
+            Assessment assessment = assessmentList.get(i);
+
+            if (assessment.getAssessment_id() == assessmentID) {
+
+                repository.delete(assessment);
+                Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
+
+            }
 
         }
 
     }
+
 
 
     @Override

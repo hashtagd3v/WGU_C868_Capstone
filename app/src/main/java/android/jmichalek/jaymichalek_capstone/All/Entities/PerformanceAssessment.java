@@ -1,23 +1,32 @@
 package android.jmichalek.jaymichalek_capstone.All.Entities;
 
-import androidx.room.Entity;
+import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "performance_assessment")
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+
+@Entity(tableName = "performance_assessment", foreignKeys = {
+        @ForeignKey(
+                entity = Assessment.class,
+                parentColumns = "assessment_id",
+                childColumns = "assessment_reference",
+                onUpdate = CASCADE,
+                onDelete = CASCADE
+        )
+})
 public class PerformanceAssessment extends Assessment{
 
-    private String type;
+    @ColumnInfo(name = "assessment_reference")
+    private int assessment_reference;
 
-    public PerformanceAssessment(int assessmentID, String assessmentName, String assessmentStart, String assessmentEnd, int courseID, String type) {
-        super(assessmentID, assessmentName, assessmentStart, assessmentEnd, courseID);
-        this.type = type;
+    public PerformanceAssessment(int assessment_id, String assessmentName, String assessmentStart, String assessmentEnd, int courseID, String type, int assessment_reference) {
+        super(assessment_id, assessmentName, assessmentStart, assessmentEnd, courseID, type);
+        this.assessment_reference = assessment_reference;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public int getAssessment_reference() {
+        return assessment_reference;
     }
 
 }

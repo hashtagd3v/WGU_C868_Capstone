@@ -1,8 +1,9 @@
-package android.jmichalek.jaymichalek_capstone.All.UI;
+package android.jmichalek.jaymichalekwguscheduler.All.UI;
 
 import android.content.Context;
 import android.content.Intent;
-import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
+import android.jmichalek.jaymichalek_capstone.All.UI.AssessmentDetail;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<PerformanceAssessmentAdapter.AssessmentViewHolder> {
+public class AssessmentAdapter extends RecyclerView.Adapter<AssessmentAdapter.AssessmentViewHolder> {
 
-    private List<PerformanceAssessment> mAssessment;
+    private List<Assessment> mAssessment;
     private final Context context;
     private final LayoutInflater mInflater;
 
@@ -31,7 +32,7 @@ public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<Performan
                 @Override
                 public void onClick(View view) {
                     int position = getAdapterPosition();
-                    final PerformanceAssessment current = mAssessment.get(position);
+                    final Assessment current = mAssessment.get(position);
                     Intent intent = new Intent(context, AssessmentDetail.class);
                     intent.putExtra("assessment_id", current.getAssessment_id());
                     intent.putExtra("name", current.getAssessmentName());
@@ -45,7 +46,7 @@ public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<Performan
         }
     }
 
-    public PerformanceAssessmentAdapter(Context context) {
+    public AssessmentAdapter(Context context) {
 
         mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -54,7 +55,7 @@ public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<Performan
 
     @NonNull
     @Override
-    public PerformanceAssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AssessmentAdapter.AssessmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View itemView = mInflater.inflate(R.layout.assessment_item_row, parent, false);
 
@@ -63,10 +64,10 @@ public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<Performan
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PerformanceAssessmentAdapter.AssessmentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AssessmentAdapter.AssessmentViewHolder holder, int position) {
 
         if (mAssessment != null) {
-            PerformanceAssessment current = mAssessment.get(position);
+            Assessment current = mAssessment.get(position);
             holder.rowItemAssessment.setText(current.getAssessmentName());
         }
         else {
@@ -75,7 +76,7 @@ public class PerformanceAssessmentAdapter extends RecyclerView.Adapter<Performan
 
     }
 
-    public void setAssessment(List<PerformanceAssessment> assessments) {
+    public void setAssessment(List<Assessment> assessments) {
 
         mAssessment = assessments;
         notifyDataSetChanged();
