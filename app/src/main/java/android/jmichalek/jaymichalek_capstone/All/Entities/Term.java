@@ -1,5 +1,6 @@
 package android.jmichalek.jaymichalek_capstone.All.Entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,8 +8,10 @@ import androidx.room.PrimaryKey;
 public class Term {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "termID")
     private int termID;
 
+    @ColumnInfo(name="termName")
     private String termName;
     private String termStart;
     private String termEnd;
