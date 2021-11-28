@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 "123-456-7891", "wood@hogwarts.com", "Golden Snitch Practice", 1);
         course_repository2.insert(second_course);
 
-//        Used Upcasting for polymorphism:
+        //Used Upcasting for polymorphism:
 
         Assessment assessment = (Assessment) new PerformanceAssessment(0, "Practical Exam 1", "12/15/21", "12/31/21", 1,"Performance Assessment", 0);
         Repository addToAssessment1 = new Repository(getApplication());

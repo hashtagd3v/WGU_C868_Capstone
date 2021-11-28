@@ -15,6 +15,9 @@ public class Term {
     private String termName;
     private String termStart;
     private String termEnd;
+//    private String created_date;
+
+    //TODO: Timestamp.valueOf(LocalDateTime.now()).toString() -- ADD COLUMN WHEN SAVING IN DB
 
     public Term(int termID, String termName, String termStart, String termEnd) {
         this.termID = termID;
