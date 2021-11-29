@@ -45,6 +45,7 @@
     <string name="assessmentText_end_date">Assessment End Date:</string>
     <string name="assessmentText_type">Assessment Type</string>
     <string name="search">Search</string>
+    <string name="title_created_date_report">Term Created Date Report</string>
     <string-array name="assessmentType_array">
         <item>Performance Assessment</item>
         <item>Objective Assessment</item>

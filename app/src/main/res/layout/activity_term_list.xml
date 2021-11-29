@@ -32,4 +32,18 @@
         app:srcCompat="@drawable/ic_add_foreground"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
+    <Button
+        android:id="@+id/btn_getReport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Term Created Date Report"
+        android:textSize="10sp"
+        android:onClick="getTermReport"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addTermBtn"
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView_term"
+        app:layout_constraintVertical_bias="0.24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

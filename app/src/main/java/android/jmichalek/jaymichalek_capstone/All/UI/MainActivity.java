@@ -13,6 +13,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -35,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addSampleData() {
 
+        Date currentDateTime = Calendar.getInstance().getTime();
+        String created_date = currentDateTime.toString();
+
         Repository repository = new Repository(getApplication());
-        Term term = new Term(0,"Spring Term", "1/1/21", "3/30/21");
+        Term term = new Term(0,"Spring Term", "1/1/21", "3/30/21", created_date);
         repository.insert(term);
         Repository term_repository = new Repository(getApplication());
-        Term second_term = new Term(0,"Summer Term", "6/1/21", "8/31/21");
+        Term second_term = new Term(0,"Summer Term", "6/1/21", "8/31/21", created_date);
         term_repository.insert(second_term);
 
         Repository course_repository1 = new Repository(getApplication());

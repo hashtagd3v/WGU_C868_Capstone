@@ -120,7 +120,8 @@ public class CourseDetail extends AppCompatActivity {
 
     }
 
-    /* This method enables user to switch back to previous screen or refresh screen.*/
+    /* This method enables user to switch back to previous screen or refresh screen and implements
+    code based on user options selection.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

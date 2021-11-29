@@ -11,11 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class AddTermScreen extends AppCompatActivity {
 
     private String termTitle;
     private String termStart;
     private String termEnd;
+    private String created_date;
     private EditText editTermTitle;
     private EditText editTermStart;
     private EditText editTermEnd;
@@ -68,6 +72,9 @@ public class AddTermScreen extends AppCompatActivity {
         String currentStart = editTermStart.getText().toString();
         String currentEnd = editTermEnd.getText().toString();
 
+        Date currentDateTime = Calendar.getInstance().getTime();
+        String created_date = currentDateTime.toString();
+
         //Check if term title edit text field is not empty:
         if (    currentTermTitle.isEmpty() ||
                 currentStart.isEmpty()     ||
@@ -79,7 +86,7 @@ public class AddTermScreen extends AppCompatActivity {
         }
         else {
 
-            Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd);
+            Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
             repository.insert(newTerm);
             Toast.makeText(AddTermScreen.this, "New term added. Go back and refresh screen.", Toast.LENGTH_LONG).show();
 

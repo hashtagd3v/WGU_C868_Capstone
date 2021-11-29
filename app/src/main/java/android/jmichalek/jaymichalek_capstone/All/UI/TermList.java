@@ -77,7 +77,7 @@ public class TermList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                termAdapter.getFilter().filter(newText.toLowerCase().toString());
+                termAdapter.getFilter().filter(newText.toLowerCase());
                 return false;
             }
         });
@@ -86,7 +86,8 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    /* This method enables user to switch back to previous screen or refresh screen.*/
+    /* This method enables user to switch back to previous screen or refresh screen and implements
+    code based on user options selection.*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -114,6 +115,15 @@ public class TermList extends AppCompatActivity {
     public void addTerm(View view) {
 
         Intent intent = new Intent(TermList.this, AddTermScreen.class);
+        startActivity(intent);
+
+    }
+
+    /* This method takes user to term report screen which shows created date time stamp report for list
+    * of terms.*/
+    public void getTermReport(View view) {
+
+        Intent intent = new Intent(TermList.this, TermReport.class);
         startActivity(intent);
 
     }
