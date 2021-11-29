@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class TermDetail extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class TermDetail extends AppCompatActivity {
     private String termTitle;
     private String termStart;
     private String termEnd;
+    private String created_date;
     private EditText editTermTitle;
     private EditText editTermStart;
     private EditText editTermEnd;
@@ -44,6 +47,7 @@ public class TermDetail extends AppCompatActivity {
         termTitle = getIntent().getStringExtra("name");
         termStart = getIntent().getStringExtra("start");
         termEnd = getIntent().getStringExtra("end");
+        created_date = getIntent().getStringExtra("created");
 
         //Connect activity layout with edit text fields:
         editTermTitle = findViewById(R.id.editText_termTitle);
@@ -117,6 +121,9 @@ public class TermDetail extends AppCompatActivity {
         String start;
         String end;
 
+        Date currentDateTime = Calendar.getInstance().getTime();
+        String created_date = currentDateTime.toString();
+
         mTerms = repository.getAllTerms();
         for (int i = 0; i < mTerms.size(); i++) {
 
@@ -130,6 +137,7 @@ public class TermDetail extends AppCompatActivity {
                 current_term.setTermName(name);
                 current_term.setTermStart(start);
                 current_term.setTermEnd(end);
+                current_term.setCreated_date(created_date);
 
                 repository.update(current_term);
                 Toast.makeText(TermDetail.this, "Term Updated. Go back and refresh screen.", Toast.LENGTH_LONG).show();

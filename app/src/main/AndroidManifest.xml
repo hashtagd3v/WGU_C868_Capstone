@@ -9,41 +9,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JayMichalekWGUScheduler">
+        <activity
+            android:name=".All.UI.TermReport"
+            android:exported="false"
+            android:label="@string/title_created_date_report"/>
+
         <receiver
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.MyReceiver"
+            android:name=".All.UI.MyReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.CourseDetail"
+            android:name=".All.UI.CourseDetail"
             android:exported="true"
             android:label="@string/title_courseDetail" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.AssessmentDetail"
+            android:name=".All.UI.AssessmentDetail"
             android:exported="true"
             android:label="@string/title_assessmentDetail" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.AddAssessmentScreen"
+            android:name=".All.UI.AddAssessmentScreen"
             android:exported="true"
             android:label="@string/title_addAssessment" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.AddCourseScreen"
+            android:name=".All.UI.AddCourseScreen"
             android:exported="true"
             android:label="@string/title_addCourse" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.AddTermScreen"
+            android:name=".All.UI.AddTermScreen"
             android:exported="true"
             android:label="@string/title_addTerm" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.TermDetail"
+            android:name=".All.UI.TermDetail"
             android:exported="true"
             android:label="@string/title_termDetail" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.TermList"
+            android:name=".All.UI.TermList"
             android:exported="true"
             android:label="@string/title_termList" />
         <activity
-            android:name="android.jmichalek.jaymichalek_capstone.All.UI.MainActivity"
+            android:name=".All.UI.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

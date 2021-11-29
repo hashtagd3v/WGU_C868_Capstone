@@ -1,5 +1,6 @@
 package android.jmichalek.jaymichalek_capstone.All.Entities;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -7,17 +8,21 @@ import androidx.room.PrimaryKey;
 public class Term {
 
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "termID")
     private int termID;
 
+    @ColumnInfo(name="termName")
     private String termName;
     private String termStart;
     private String termEnd;
+    private String created_date;
 
-    public Term(int termID, String termName, String termStart, String termEnd) {
+    public Term(int termID, String termName, String termStart, String termEnd, String created_date) {
         this.termID = termID;
         this.termName = termName;
         this.termStart = termStart;
         this.termEnd = termEnd;
+        this.created_date = created_date;
     }
 
     @Override
@@ -61,4 +66,13 @@ public class Term {
     public void setTermEnd(String termEnd) {
         this.termEnd = termEnd;
     }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
 }
