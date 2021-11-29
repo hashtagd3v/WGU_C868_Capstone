@@ -7,23 +7,39 @@ import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
+import android.jmichalek.jaymichalek_capstone.All.Entities.User;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String username;
+    private String password;
+    private EditText editUserName;
+    private EditText editPassword;
+    private List<User> allUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Add sample data:
 //        addSampleData();
+//        addSampleUserData();
+
+        //Connect activity layout with edit text fields:
+        editUserName = findViewById(R.id.editText_username);
+        editPassword = findViewById(R.id.editText_password);
 
     }
 
@@ -31,8 +47,40 @@ public class MainActivity extends AppCompatActivity {
      * is TermList screen.*/
     public void enterButton(View view) {
 
-        Intent intent = new Intent(MainActivity.this, TermList.class);
-        startActivity(intent);
+        User currentUser;
+        username = editUserName.getText().toString();
+        password = editPassword.getText().toString();
+
+        //Check if text fields are empty:
+        if (username.isEmpty() || password.isEmpty()) {
+
+            Toast.makeText(MainActivity.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            //Compare user entered text fields to users_table stored username and passwords:
+            Repository user_repository = new Repository(getApplication());
+            allUsers = user_repository.getAllUsers();
+            for (int i = 0; i < allUsers.size(); i++) {
+
+                currentUser = allUsers.get(i);
+
+                if (currentUser.getUserName().equals(username) && currentUser.getPassword().equals(password)) {
+
+                    Intent intent = new Intent(MainActivity.this, TermList.class);
+                    startActivity(intent);
+
+                } else {
+
+                    Toast.makeText(MainActivity.this, "Username and/or password are incorrect. Try again.", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+        }
+
+
 
     }
 
@@ -66,6 +114,14 @@ public class MainActivity extends AppCompatActivity {
         Assessment second_assessment = (Assessment) new ObjectiveAssessment(0, "Objective Exam 2", "12/15/21", "12/31/21", 1,"Objective Assessment", 0);
         Repository addToAssessment2 = new Repository(getApplication());
         addToAssessment2.insert(second_assessment);
+
+    }
+
+    public void addSampleUserData() {
+
+        User testUser = new User(0, "admin", "admin");
+        Repository addUser = new Repository(getApplication());
+        addUser.insert(testUser);
 
     }
 

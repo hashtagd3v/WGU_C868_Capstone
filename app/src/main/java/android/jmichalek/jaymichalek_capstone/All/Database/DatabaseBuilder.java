@@ -4,20 +4,23 @@ import android.content.Context;
 import android.jmichalek.jaymichalek_capstone.All.DAO.AssessmentDAO;
 import android.jmichalek.jaymichalek_capstone.All.DAO.CourseDAO;
 import android.jmichalek.jaymichalek_capstone.All.DAO.TermDAO;
+import android.jmichalek.jaymichalek_capstone.All.DAO.UserDAO;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
+import android.jmichalek.jaymichalek_capstone.All.Entities.User;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Term.class, Course.class, Assessment.class}, version = 16, exportSchema = false)
+@Database(entities = {Term.class, Course.class, Assessment.class, User.class}, version = 18, exportSchema = false)
 public abstract class DatabaseBuilder extends RoomDatabase {
 
     public abstract TermDAO termDAO();
     public abstract CourseDAO courseDAO();
     public abstract AssessmentDAO assessmentDAO();
+    public abstract UserDAO userDAO();
 
     private static volatile DatabaseBuilder INSTANCE;
 
