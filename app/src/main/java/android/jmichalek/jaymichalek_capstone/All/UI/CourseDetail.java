@@ -210,14 +210,8 @@ public class CourseDetail extends AppCompatActivity {
         email = editEmail.getText().toString();
         notes = editNotes.getText().toString();
 
-        //Check if text fields are not empty:
-        if (    courseTitle.isEmpty() || courseStart.isEmpty() || courseEnd.isEmpty()
-                || courseStatus.isEmpty() || courseInstructor.isEmpty() ||
-                phone.isEmpty() || email.isEmpty()  ) {
-
-            Toast.makeText(CourseDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
-
-        } else {
+        //Check if text fields are not empty and validates user's input date format from text fields:
+        if ( courseStart.matches("\\d{2}/\\d{2}/\\d{2}") && courseEnd.matches("\\d{2}/\\d{2}/\\d{2}") ) {
 
             Repository repository = new Repository(getApplication());
             mCourses = repository.getCoursesByTermId(currentTermID);
@@ -239,7 +233,18 @@ public class CourseDetail extends AppCompatActivity {
                     Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
                 }
+
             }
+
+        } else if ( courseTitle.isEmpty() || courseStart.isEmpty() || courseEnd.isEmpty()
+            || courseStatus.isEmpty() || courseInstructor.isEmpty() ||
+            phone.isEmpty() || email.isEmpty() ){
+
+            Toast.makeText(CourseDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(CourseDetail.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
 
         }
 

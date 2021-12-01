@@ -92,7 +92,7 @@ public class AddTermScreen extends AppCompatActivity {
 
                 Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
                 repository.insert(newTerm);
-                Toast.makeText(AddTermScreen.this, "New term added. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddTermScreen.this, "New term added.", Toast.LENGTH_LONG).show();
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -106,7 +106,6 @@ public class AddTermScreen extends AppCompatActivity {
                 Toast.makeText(AddTermScreen.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
 
             }
-
 
         }
 
