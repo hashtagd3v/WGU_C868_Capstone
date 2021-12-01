@@ -162,32 +162,30 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         assessmentStart = editStart.getText().toString();
         assessmentEnd = editEnd.getText().toString();
 
-        if ( assessmentTitle.isEmpty() || assessmentStart.isEmpty() || assessmentEnd.isEmpty() ) {
+        if ( assessmentTitle.isEmpty() || assessmentStart.isEmpty() || assessmentEnd.isEmpty() ){
 
             Toast.makeText(AssessmentDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
+            return;
 
-        } else {
+        } //Validates user's input date format from text fields:
+        else if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
 
             assessmentList = repository.getAssessmentsByCourseID(currentCourseID);
             for (int i = 0; i < assessmentList.size(); i++) {
 
-                Assessment assessment = assessmentList.get(i);
+                        Assessment assessment = assessmentList.get(i);
 
-                if (assessment.getAssessment_id() == assessmentID) {
+                        if (assessment.getAssessment_id() == assessmentID) {
 
-                    repository.delete(assessment);
+                            repository.delete(assessment);
+                            break;
 
-                 }
+                        }
 
-                }
+                    }
 
-            }
-
-        //Validates user's input date format from text fields:
-        if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
-
-            //Check if performance or objective type of assessment and create new proper assessment type:
-            //Used Downcasting for polymorphism requirement:
+                //Check if performance or objective type of assessment and create new proper assessment type:
+                //Used Downcasting for polymorphism requirement:
 
                 if (assessment_type == true) {
                     //Change type of assessment prior to saving based on user selection from spinner:
@@ -196,22 +194,22 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
                     Repository addToAssessment = new Repository(getApplication());
                     addToAssessment.insert(performanceAssessment);
 
-                }
-                else {
+                } else {
                     //Change type of assessment prior to saving based on user selection from spinner:
                     String changeType = "Objective Assessment";
-                    Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+                    Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
                     Repository addToAssessment = new Repository(getApplication());
                     addToAssessment.insert(objectiveAssessment);
+
                 }
 
             } else {
 
-                Toast.makeText(AssessmentDetail.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
+            Toast.makeText(AssessmentDetail.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
 
-            }
+                }
 
-        }
+    }
 
 
     //This method deletes current assessment selected from database.
@@ -225,7 +223,7 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
             if (assessment.getAssessment_id() == assessmentID) {
 
                 repository.delete(assessment);
-                Toast.makeText(AssessmentDetail.this, "Deleted.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AssessmentDetail.this, "Deleted. Go back and refresh previous screen.", Toast.LENGTH_LONG).show();
 
             }
 
