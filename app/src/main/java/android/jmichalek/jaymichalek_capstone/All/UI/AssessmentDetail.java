@@ -183,23 +183,32 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
 
             }
 
-        //Check if performance or objective type of assessment and create new proper assessment type:
-        //Used Downcasting for polymorphism requirement:
+        //Validates user's input date format from text fields:
+        if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
 
-        if (assessment_type == true) {
-            //Change type of assessment prior to saving based on user selection from spinner:
-            String changeType = "Performance Assessment";
-            Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
-            Repository addToAssessment = new Repository(getApplication());
-            addToAssessment.insert(performanceAssessment);
+            //Check if performance or objective type of assessment and create new proper assessment type:
+            //Used Downcasting for polymorphism requirement:
 
-        }
-        else {
-            //Change type of assessment prior to saving based on user selection from spinner:
-            String changeType = "Objective Assessment";
-            Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
-            Repository addToAssessment = new Repository(getApplication());
-            addToAssessment.insert(objectiveAssessment);
+                if (assessment_type == true) {
+                    //Change type of assessment prior to saving based on user selection from spinner:
+                    String changeType = "Performance Assessment";
+                    Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+                    Repository addToAssessment = new Repository(getApplication());
+                    addToAssessment.insert(performanceAssessment);
+
+                }
+                else {
+                    //Change type of assessment prior to saving based on user selection from spinner:
+                    String changeType = "Objective Assessment";
+                    Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+                    Repository addToAssessment = new Repository(getApplication());
+                    addToAssessment.insert(objectiveAssessment);
+                }
+
+            } else {
+
+                Toast.makeText(AssessmentDetail.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
+
             }
 
         }
