@@ -80,7 +80,7 @@ public class TermDetail extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_recyclerview, menu);
+        getMenuInflater().inflate(R.menu.menu_refresh, menu);
         return true;
 
     }
@@ -124,27 +124,48 @@ public class TermDetail extends AppCompatActivity {
         Date currentDateTime = Calendar.getInstance().getTime();
         String created_date = currentDateTime.toString();
 
-        mTerms = repository.getAllTerms();
-        for (int i = 0; i < mTerms.size(); i++) {
+        name = editTermTitle.getText().toString();
+        start = editTermStart.getText().toString();
+        end = editTermEnd.getText().toString();
 
-            current_term = mTerms.get(i);
+        if (start.matches("\\d{2}/\\d{2}/\\d{2}") && end.matches("\\d{2}/\\d{2}/\\d{2}")) {
 
-            if (current_term.getTermID() == current_termID) {
-                name = editTermTitle.getText().toString();
-                start = editTermStart.getText().toString();
-                end = editTermEnd.getText().toString();
+            mTerms = repository.getAllTerms();
+            for (int i = 0; i < mTerms.size(); i++) {
 
-                current_term.setTermName(name);
-                current_term.setTermStart(start);
-                current_term.setTermEnd(end);
-                current_term.setCreated_date(created_date);
+                current_term = mTerms.get(i);
 
-                repository.update(current_term);
-                Toast.makeText(TermDetail.this, "Term Updated. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                if (current_term.getTermID() == current_termID) {
+
+                    current_term.setTermName(name);
+                    current_term.setTermStart(start);
+                    current_term.setTermEnd(end);
+                    current_term.setCreated_date(created_date);
+
+                    repository.update(current_term);
+                    Toast.makeText(TermDetail.this, "Term Updated.", Toast.LENGTH_LONG).show();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(TermDetail.this, TermList.class);
+                    startActivity(intent);
+
+                }
 
             }
 
+        } else if (name.isEmpty() || start.isEmpty() || end.isEmpty()){
+
+            Toast.makeText(TermDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
+
+        } else {
+
+            Toast.makeText(TermDetail.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
+
         }
+
 
     }
 
@@ -161,7 +182,14 @@ public class TermDetail extends AppCompatActivity {
                 //Check if term has courses in it:
                 if (allCourses.isEmpty()) {
                     repository.delete(current_term);
-                    Toast.makeText(TermDetail.this, "Term Deleted. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(TermDetail.this, "Term Deleted.", Toast.LENGTH_LONG).show();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(TermDetail.this, TermList.class);
+                    startActivity(intent);
                     break;
                 }
                 else {
