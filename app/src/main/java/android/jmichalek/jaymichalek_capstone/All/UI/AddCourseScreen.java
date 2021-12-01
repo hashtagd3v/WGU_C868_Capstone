@@ -96,9 +96,19 @@ public class AddCourseScreen extends AppCompatActivity {
         }
         else {
 
-            Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
-            repository.insert(newCourse);
-            Toast.makeText(AddCourseScreen.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+            //Validates user's input date format from text fields:
+            if (courseStart.matches("\\d{2}/\\d{2}/\\d{2}") && courseEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+
+                Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
+                repository.insert(newCourse);
+                Toast.makeText(AddCourseScreen.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(AddCourseScreen.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
+
+            }
+
 
         }
 

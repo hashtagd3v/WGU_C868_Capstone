@@ -29,7 +29,6 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
     private EditText editStart;
     private EditText editEnd;
     private Spinner spinner_assessmentType;
-    private Repository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +53,6 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.assessmentType_array, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_assessmentType.setAdapter(adapter);
-
-        repository = new Repository(getApplication());
 
     }
 
@@ -88,21 +85,30 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         }
         else {
 
-            //Check assessment type selected (used Upcasting for polymorphism):
+            //Validates user's input date format from text fields:
+            if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
 
-            if (assessment_type == true) {
-                Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
-                Repository addToAssessment = new Repository(getApplication());
-                addToAssessment.insert(performanceAssessment);
+                //Check assessment type selected (used Upcasting for polymorphism):
+
+                if (assessment_type == true) {
+                    Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
+                    Repository addToAssessment = new Repository(getApplication());
+                    addToAssessment.insert(performanceAssessment);
+
+                }
+                else {
+                    Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
+                    Repository addToAssessment = new Repository(getApplication());
+                    addToAssessment.insert(objectiveAssessment);
+                }
+
+                Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Toast.makeText(AddAssessmentScreen.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
 
             }
-            else {
-                Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
-                Repository addToAssessment = new Repository(getApplication());
-                addToAssessment.insert(objectiveAssessment);
-            }
-
-            Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
         }
 

@@ -48,11 +48,11 @@ public class TermList extends AppCompatActivity {
 
     }
 
-    /*Inflates menu/refresh option for this screen.*/
+    /*Inflates menu/refresh option for this screen. Implements search requirement functionality:*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_recyclerview, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
 
         MenuItem.OnActionExpandListener onActionExpandListener = new MenuItem.OnActionExpandListener() {
             @Override
@@ -66,6 +66,7 @@ public class TermList extends AppCompatActivity {
             }
         };
 
+        //Searches list of terms:
         menu.findItem(R.id.search).setOnActionExpandListener(onActionExpandListener);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setQueryHint("Search Terms");
@@ -95,15 +96,6 @@ public class TermList extends AppCompatActivity {
             case android.R.id.home:
                 this.finish();
                 return true;
-            case R.id.menu_refresh:
-                repository = new Repository(getApplication());
-                List<Term> allTerms = repository.getAllTerms();
-                RecyclerView recyclerView = findViewById(R.id.recyclerView_term);
-                final TermAdapter termAdapter = new TermAdapter(this, allTerms);
-                recyclerView.setAdapter(termAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                termAdapter.setTerms(allTerms);
-                Toast.makeText(TermList.this, "Refreshed.", Toast.LENGTH_LONG).show();
 
         }
 

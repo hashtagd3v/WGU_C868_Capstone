@@ -1,5 +1,6 @@
 package android.jmichalek.jaymichalek_capstone.All.UI;
 
+import android.content.Intent;
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
 import android.jmichalek.jaymichalek_capstone.R;
@@ -19,7 +20,6 @@ public class AddTermScreen extends AppCompatActivity {
     private String termTitle;
     private String termStart;
     private String termEnd;
-    private String created_date;
     private EditText editTermTitle;
     private EditText editTermStart;
     private EditText editTermEnd;
@@ -65,7 +65,8 @@ public class AddTermScreen extends AppCompatActivity {
 
     }
 
-    /*Enables user to add new term in Add Term Screen.*/
+    /*Enables user to add new term in Add Term Screen.
+    Implements validation functionality requirement:*/
     public void saveTerm(View view) {
 
         String currentTermTitle = editTermTitle.getText().toString();
@@ -86,9 +87,26 @@ public class AddTermScreen extends AppCompatActivity {
         }
         else {
 
-            Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
-            repository.insert(newTerm);
-            Toast.makeText(AddTermScreen.this, "New term added. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+            //Validates user's input date format from text fields:
+            if (currentStart.matches("\\d{2}/\\d{2}/\\d{2}") && currentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+
+                Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
+                repository.insert(newTerm);
+                Toast.makeText(AddTermScreen.this, "New term added. Go back and refresh screen.", Toast.LENGTH_LONG).show();
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(AddTermScreen.this, TermList.class);
+                startActivity(intent);
+
+            } else {
+
+                Toast.makeText(AddTermScreen.this, "Please type required input date format in text fields.", Toast.LENGTH_LONG).show();
+
+            }
+
 
         }
 
