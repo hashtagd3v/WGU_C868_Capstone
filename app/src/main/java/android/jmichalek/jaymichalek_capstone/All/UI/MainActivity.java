@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* When Enter button is pressed, this method brings user to next screen which
-     * is TermList screen.*/
+     * is TermList screen if log in verification with user_table matches the user input in
+     * username and password text fields.*/
     public void enterButton(View view) {
 
         User currentUser;
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addSampleUserData() {
 
+        //This is the username and password to be used for testing purposes:
         User testUser = new User(0, "admin", "admin");
         Repository addUser = new Repository(getApplication());
         addUser.insert(testUser);
