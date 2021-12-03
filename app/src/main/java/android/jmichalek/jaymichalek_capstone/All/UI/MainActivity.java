@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Add sample data:
-//        addSampleData();
-//        addSampleUserData();
+        addSampleData();
+        addSampleUserData();
 
         //Connect activity layout with edit text fields:
         editUserName = findViewById(R.id.editText_username);
