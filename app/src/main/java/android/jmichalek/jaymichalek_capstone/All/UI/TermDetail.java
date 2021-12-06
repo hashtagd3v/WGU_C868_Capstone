@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -124,33 +125,44 @@ public class TermDetail extends AppCompatActivity {
         Date currentDateTime = Calendar.getInstance().getTime();
         String created_date = currentDateTime.toString();
 
+        DateValidator validator = new DateValidator();
+
         name = editTermTitle.getText().toString();
         start = editTermStart.getText().toString();
         end = editTermEnd.getText().toString();
 
-        if (start.matches("\\d{2}/\\d{2}/\\d{2}") && end.matches("\\d{2}/\\d{2}/\\d{2}")) {
+        //Validates date user input from text fields:
+        if (validator.isDateValid(start) && validator.isDateValid(end)) {
 
-            mTerms = repository.getAllTerms();
-            for (int i = 0; i < mTerms.size(); i++) {
+            if (!validator.isDateSequenceValid(start, end)) {
 
-                current_term = mTerms.get(i);
+                Toast.makeText(TermDetail.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
 
-                if (current_term.getTermID() == current_termID) {
+            } else {
 
-                    current_term.setTermName(name);
-                    current_term.setTermStart(start);
-                    current_term.setTermEnd(end);
-                    current_term.setCreated_date(created_date);
+                mTerms = repository.getAllTerms();
+                for (int i = 0; i < mTerms.size(); i++) {
 
-                    repository.update(current_term);
-                    Toast.makeText(TermDetail.this, "Term Updated.", Toast.LENGTH_LONG).show();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    current_term = mTerms.get(i);
+
+                    if (current_term.getTermID() == current_termID) {
+
+                        current_term.setTermName(name);
+                        current_term.setTermStart(start);
+                        current_term.setTermEnd(end);
+                        current_term.setCreated_date(created_date);
+
+                        repository.update(current_term);
+                        Toast.makeText(TermDetail.this, "Term Updated.", Toast.LENGTH_LONG).show();
+                        try {
+                            Thread.sleep(1000);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Intent intent = new Intent(TermDetail.this, TermList.class);
+                        startActivity(intent);
+
                     }
-                    Intent intent = new Intent(TermDetail.this, TermList.class);
-                    startActivity(intent);
 
                 }
 

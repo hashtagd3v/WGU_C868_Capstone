@@ -7,6 +7,7 @@ import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -76,6 +77,8 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         assessmentStart = editStart.getText().toString();
         assessmentEnd = editEnd.getText().toString();
 
+        DateValidator validator = new DateValidator();
+
         //Check if fields are empty:
         if (assessmentTitle.isEmpty() || assessmentStart.isEmpty() || assessmentEnd.isEmpty()) {
 
@@ -85,24 +88,32 @@ public class AddAssessmentScreen extends AppCompatActivity implements AdapterVie
         }
         else {
 
-            //Validates user's input date format from text fields:
-            if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+            //Validates user's input date from text fields:
+            if (validator.isDateValid(assessmentStart) && validator.isDateValid(assessmentEnd)) {
 
-                //Check assessment type selected (used Upcasting for polymorphism):
+                if (!validator.isDateSequenceValid(assessmentStart, assessmentEnd)) {
 
-                if (assessment_type == true) {
-                    Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
-                    Repository addToAssessment = new Repository(getApplication());
-                    addToAssessment.insert(performanceAssessment);
+                    Toast.makeText(AddAssessmentScreen.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    //Check assessment type selected (used Upcasting for polymorphism):
+
+                    if (assessment_type == true) {
+                        Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
+                        Repository addToAssessment = new Repository(getApplication());
+                        addToAssessment.insert(performanceAssessment);
+
+                    }
+                    else {
+                        Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
+                        Repository addToAssessment = new Repository(getApplication());
+                        addToAssessment.insert(objectiveAssessment);
+                    }
+
+                    Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
                 }
-                else {
-                    Assessment objectiveAssessment = new ObjectiveAssessment(0,assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, selectedString, 0);
-                    Repository addToAssessment = new Repository(getApplication());
-                    addToAssessment.insert(objectiveAssessment);
-                }
-
-                Toast.makeText(AddAssessmentScreen.this, "New assessment added. Refresh previous screen.", Toast.LENGTH_LONG).show();
 
             } else {
 
