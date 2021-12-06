@@ -2,6 +2,7 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -85,6 +86,8 @@ public class AddCourseScreen extends AppCompatActivity {
         email = editEmail.getText().toString();
         notes = editNotes.getText().toString();
 
+        DateValidator validator = new DateValidator();
+
         //Check if text fields are not empty:
         if (    courseTitle.isEmpty() || courseStart.isEmpty() || courseEnd.isEmpty()
                 || courseStatus.isEmpty() || courseInstructor.isEmpty() ||
@@ -97,11 +100,19 @@ public class AddCourseScreen extends AppCompatActivity {
         else {
 
             //Validates user's input date format from text fields:
-            if (courseStart.matches("\\d{2}/\\d{2}/\\d{2}") && courseEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+            if (validator.isDateValid(courseStart) && validator.isDateValid(courseEnd)) {
 
-                Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
-                repository.insert(newCourse);
-                Toast.makeText(AddCourseScreen.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+                if (!validator.isDateSequenceValid(courseStart, courseEnd)) {
+
+                    Toast.makeText(AddCourseScreen.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Course newCourse = new Course(0, courseTitle, courseStart, courseEnd, courseStatus, courseInstructor, phone, email, notes, currentTermID);
+                    repository.insert(newCourse);
+                    Toast.makeText(AddCourseScreen.this, "New course added. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+                }
 
             } else {
 

@@ -11,6 +11,7 @@ import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Course;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.jmichalek.jaymichalekwguscheduler.All.UI.AssessmentAdapter;
 import android.os.Bundle;
@@ -210,27 +211,37 @@ public class CourseDetail extends AppCompatActivity {
         email = editEmail.getText().toString();
         notes = editNotes.getText().toString();
 
-        //Check if text fields are not empty and validates user's input date format from text fields:
-        if ( courseStart.matches("\\d{2}/\\d{2}/\\d{2}") && courseEnd.matches("\\d{2}/\\d{2}/\\d{2}") ) {
+        DateValidator validator = new DateValidator();
 
-            Repository repository = new Repository(getApplication());
-            mCourses = repository.getCoursesByTermId(currentTermID);
-            for (int i = 0; i < mCourses.size(); i++) {
+        //Check if text fields are not empty and validates user's input date from text fields:
+        if (validator.isDateValid(courseStart) && validator.isDateValid(courseEnd)) {
 
-                currentCourse = mCourses.get(i);
+            if (!validator.isDateSequenceValid(courseStart, courseEnd)) {
 
-                if (currentCourse.getCourseID() == courseID) {
+                Toast.makeText(CourseDetail.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
 
-                    currentCourse.setCourseName(courseTitle);
-                    currentCourse.setCourseStart(courseStart);
-                    currentCourse.setCourseEnd(courseEnd);
-                    currentCourse.setStatus(courseStatus);
-                    currentCourse.setCourseInstructorName(courseInstructor);
-                    currentCourse.setInstructorPhone(phone);
-                    currentCourse.setInstructorEmail(email);
-                    currentCourse.setCourseNote(notes);
-                    repository.update(currentCourse);
-                    Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
+            } else {
+
+                Repository repository = new Repository(getApplication());
+                mCourses = repository.getCoursesByTermId(currentTermID);
+                for (int i = 0; i < mCourses.size(); i++) {
+
+                    currentCourse = mCourses.get(i);
+
+                    if (currentCourse.getCourseID() == courseID) {
+
+                        currentCourse.setCourseName(courseTitle);
+                        currentCourse.setCourseStart(courseStart);
+                        currentCourse.setCourseEnd(courseEnd);
+                        currentCourse.setStatus(courseStatus);
+                        currentCourse.setCourseInstructorName(courseInstructor);
+                        currentCourse.setInstructorPhone(phone);
+                        currentCourse.setInstructorEmail(email);
+                        currentCourse.setCourseNote(notes);
+                        repository.update(currentCourse);
+                        Toast.makeText(CourseDetail.this, "Updated course information. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+                    }
 
                 }
 

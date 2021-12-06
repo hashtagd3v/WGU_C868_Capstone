@@ -10,6 +10,7 @@ import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Assessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.ObjectiveAssessment;
 import android.jmichalek.jaymichalek_capstone.All.Entities.PerformanceAssessment;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
 import android.view.Menu;
@@ -162,44 +163,56 @@ public class AssessmentDetail extends AppCompatActivity implements AdapterView.O
         assessmentStart = editStart.getText().toString();
         assessmentEnd = editEnd.getText().toString();
 
+        DateValidator validator = new DateValidator();
+
         if ( assessmentTitle.isEmpty() || assessmentStart.isEmpty() || assessmentEnd.isEmpty() ){
 
             Toast.makeText(AssessmentDetail.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
             return;
 
         } //Validates user's input date format from text fields:
-        else if (assessmentStart.matches("\\d{2}/\\d{2}/\\d{2}") && assessmentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+        else if (validator.isDateValid(assessmentStart) && validator.isDateValid(assessmentEnd)) {
 
-            assessmentList = repository.getAssessmentsByCourseID(currentCourseID);
-            for (int i = 0; i < assessmentList.size(); i++) {
+            if (!validator.isDateSequenceValid(assessmentStart, assessmentEnd)) {
 
-                        Assessment assessment = assessmentList.get(i);
+                Toast.makeText(AssessmentDetail.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
 
-                        if (assessment.getAssessment_id() == assessmentID) {
+            } else {
 
-                            repository.delete(assessment);
-                            break;
+                assessmentList = repository.getAssessmentsByCourseID(currentCourseID);
+                for (int i = 0; i < assessmentList.size(); i++) {
 
-                        }
+                    Assessment assessment = assessmentList.get(i);
+
+                    if (assessment.getAssessment_id() == assessmentID) {
+
+                        repository.delete(assessment);
+                        break;
 
                     }
 
-                //Check if performance or objective type of assessment and create new proper assessment type:
-                //Used Downcasting for polymorphism requirement:
+                }
 
-                if (assessment_type == true) {
-                    //Change type of assessment prior to saving based on user selection from spinner:
-                    String changeType = "Performance Assessment";
-                    Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
-                    Repository addToAssessment = new Repository(getApplication());
-                    addToAssessment.insert(performanceAssessment);
+                    //Check if performance or objective type of assessment and create new proper assessment type:
+                    //Used Downcasting for polymorphism requirement:
 
-                } else {
-                    //Change type of assessment prior to saving based on user selection from spinner:
-                    String changeType = "Objective Assessment";
-                    Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
-                    Repository addToAssessment = new Repository(getApplication());
-                    addToAssessment.insert(objectiveAssessment);
+                    if (assessment_type == true) {
+                        //Change type of assessment prior to saving based on user selection from spinner:
+                        String changeType = "Performance Assessment";
+                        Assessment performanceAssessment = (Assessment) new PerformanceAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+                        Repository addToAssessment = new Repository(getApplication());
+                        addToAssessment.insert(performanceAssessment);
+                        Toast.makeText(AssessmentDetail.this, "Assessment updated. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        //Change type of assessment prior to saving based on user selection from spinner:
+                        String changeType = "Objective Assessment";
+                        Assessment objectiveAssessment = (Assessment) new ObjectiveAssessment(0, assessmentTitle, assessmentStart, assessmentEnd, currentCourseID, changeType, 0);
+                        Repository addToAssessment = new Repository(getApplication());
+                        addToAssessment.insert(objectiveAssessment);
+                        Toast.makeText(AssessmentDetail.this, "Assessment updated. Refresh previous screen.", Toast.LENGTH_LONG).show();
+
+                    }
 
                 }
 

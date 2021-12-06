@@ -2,6 +2,7 @@ package android.jmichalek.jaymichalek_capstone.All.UI;
 
 import android.content.Intent;
 import android.jmichalek.jaymichalek_capstone.All.Database.Repository;
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
 import android.jmichalek.jaymichalek_capstone.All.Entities.Term;
 import android.jmichalek.jaymichalek_capstone.R;
 import android.os.Bundle;
@@ -76,6 +77,8 @@ public class AddTermScreen extends AppCompatActivity {
         Date currentDateTime = Calendar.getInstance().getTime();
         String created_date = currentDateTime.toString();
 
+        DateValidator validator = new DateValidator();
+
         //Check if term title edit text field is not empty:
         if (    currentTermTitle.isEmpty() ||
                 currentStart.isEmpty()     ||
@@ -84,22 +87,29 @@ public class AddTermScreen extends AppCompatActivity {
             Toast.makeText(AddTermScreen.this, "Fill out required fields.", Toast.LENGTH_LONG).show();
             return;
 
-        }
-        else {
+        } else {
 
             //Validates user's input date format from text fields:
-            if (currentStart.matches("\\d{2}/\\d{2}/\\d{2}") && currentEnd.matches("\\d{2}/\\d{2}/\\d{2}")) {
+            if (validator.isDateValid(currentStart) && validator.isDateValid(currentEnd)) {
 
-                Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
-                repository.insert(newTerm);
-                Toast.makeText(AddTermScreen.this, "New term added.", Toast.LENGTH_LONG).show();
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (!validator.isDateSequenceValid(currentStart, currentEnd)) {
+
+                    Toast.makeText(AddTermScreen.this, "Please ensure that start date is prior to end date.", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    Term newTerm = new Term(0, currentTermTitle, currentStart, currentEnd, created_date);
+                    repository.insert(newTerm);
+                    Toast.makeText(AddTermScreen.this, "New term added.", Toast.LENGTH_LONG).show();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent = new Intent(AddTermScreen.this, TermList.class);
+                    startActivity(intent);
+
                 }
-                Intent intent = new Intent(AddTermScreen.this, TermList.class);
-                startActivity(intent);
 
             } else {
 
