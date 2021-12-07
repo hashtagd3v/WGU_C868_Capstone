@@ -1,5 +1,7 @@
 package android.jmichalek.jaymichalek_capstone.All.Entities;
 
+import android.jmichalek.jaymichalek_capstone.All.Util.DateValidator;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -73,6 +75,40 @@ public class Term {
 
     public void setCreated_date(String created_date) {
         this.created_date = created_date;
+    }
+
+    //FOLLOW GEEKS ARTICLE SAMPLE! (Article in Kotlin)
+    public boolean validUserInput(String termName, String termStart, String termEnd) {  //FIXME!!!!!!!!!!!!!!!!!! START JUNIT TESTING!
+
+        DateValidator validator = new DateValidator();
+        int MAX_LENGTH = 30;
+
+        if (termName.isEmpty() || termStart.isEmpty() || termEnd. isEmpty()) {
+
+            return false;
+
+        }
+
+        if (termName.length() > MAX_LENGTH) {
+
+            return false;
+
+        }
+
+
+        if (!validator.isDateValid(termStart) && validator.isDateValid(termEnd)) {
+
+            return false;
+
+        }
+
+        if (!validator.isDateSequenceValid(termStart, termEnd)) {
+
+            return false;
+
+        }
+
+        return true;
     }
 
 }
