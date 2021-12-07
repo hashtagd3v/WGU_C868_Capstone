@@ -77,8 +77,7 @@ public class Term {
         this.created_date = created_date;
     }
 
-    //FOLLOW GEEKS ARTICLE SAMPLE! (Article in Kotlin)
-    public boolean validUserInput(String termName, String termStart, String termEnd) {  //FIXME!!!!!!!!!!!!!!!!!! START JUNIT TESTING!
+    public boolean validUserInput(String termName, String termStart, String termEnd) {
 
         DateValidator validator = new DateValidator();
         int MAX_LENGTH = 30;
