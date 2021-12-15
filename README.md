@@ -14,8 +14,7 @@ The third section will allow students to add new performance or objective types 
 The mobile applications will utilize an industry-standard database which will enable SSC to scale the app in the future and other future integrations.
 
 
-The mock business problem and proposed solution is detailed below:
-
+The mock business problem and proposed solution is detailed here:
 [JM_Task2_SectionA_Template.docx](https://github.com/hashtagd3v/WGU_C868_Capstone/files/7716578/JM_Task2_SectionA_Template.docx)
 
 The user guide is in this file below with screenshots of user interface:
